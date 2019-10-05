@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bkgd_1.png-cb27b958540f0620215eac6636e79e93.stex"
+path="res://.import/square.png-4815e166bed36aad303b8562388ff920.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bkgd_1.png"
-dest_files=[ "res://.import/bkgd_1.png-cb27b958540f0620215eac6636e79e93.stex" ]
+source_file="res://parts/square.png"
+dest_files=[ "res://.import/square.png-4815e166bed36aad303b8562388ff920.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://thruster_base.png" type="Texture" id=1]
-[ext_resource path="res://thruster.png" type="Texture" id=2]
+[ext_resource path="res://parts/thruster_base.png" type="Texture" id=1]
+[ext_resource path="res://parts/thruster.png" type="Texture" id=2]
 [ext_resource path="res://parts/Thruster.gd" type="Script" id=3]
 [ext_resource path="res://parts/Part.gd" type="Script" id=4]
 
-[sub_resource type="PhysicsMaterial" id=3]
+[sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
 
 [sub_resource type="ParticlesMaterial" id=2]
@@ -17,8 +17,10 @@ orbit_velocity_random = 0.0
 [node name="Thruster" type="RigidBody2D" groups=[
 "parts",
 ]]
+collision_layer = 2
+collision_mask = 19
 mass = 5.0
-physics_material_override = SubResource( 3 )
+physics_material_override = SubResource( 1 )
 contacts_reported = 1
 contact_monitor = true
 linear_damp = 0.0

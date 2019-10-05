@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pentagon.png-ea509dffff0901d80237a1f8ac9913fb.stex"
+path="res://.import/bkgd_1.png-fce7d2538ab52a75f74ccda0deba0335.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pentagon.png"
-dest_files=[ "res://.import/pentagon.png-ea509dffff0901d80237a1f8ac9913fb.stex" ]
+source_file="res://universe/bkgd_1.png"
+dest_files=[ "res://.import/bkgd_1.png-fce7d2538ab52a75f74ccda0deba0335.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

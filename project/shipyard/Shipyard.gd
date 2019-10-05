@@ -12,6 +12,7 @@ onready var constructor_pather = $Path2D/PathFollow2D
 onready var constructor = $Path2D/PathFollow2D/Constructor
 
 var constructor_speed = 500
+var part_launch_speed = 1000
 
 var current_part = 0
 var movement_dir = 0
@@ -36,7 +37,7 @@ func launch_part(obj):
 	obj.global_position = pos
 	obj.global_rotation = rot
 	obj.set_rigid()
-	obj.apply_central_impulse(constructor.get_launch_direction() * 3000)
+	obj.apply_central_impulse(constructor.get_launch_direction() * part_launch_speed)
 	yield(get_tree().create_timer(0.5), "timeout")
 	prepare_next_part()
 	

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/thruster.png-dc90121d3d325d87dfb1c8d4d9e8c88e.stex"
+path="res://.import/thruster.png-c33b70f14974352de7aa86463a32fd19.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://thruster.png"
-dest_files=[ "res://.import/thruster.png-dc90121d3d325d87dfb1c8d4d9e8c88e.stex" ]
+source_file="res://parts/thruster.png"
+dest_files=[ "res://.import/thruster.png-c33b70f14974352de7aa86463a32fd19.stex" ]
 
 [params]
 

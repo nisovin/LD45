@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bkgd_3.png-a827b0af2a122a88b94f665797683d94.stex"
+path="res://.import/triangle.png-d76b98387f0df4ad236a10fa0f38e5c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bkgd_3.png"
-dest_files=[ "res://.import/bkgd_3.png-a827b0af2a122a88b94f665797683d94.stex" ]
+source_file="res://parts/triangle.png"
+dest_files=[ "res://.import/triangle.png-d76b98387f0df4ad236a10fa0f38e5c5.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

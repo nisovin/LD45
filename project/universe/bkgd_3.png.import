@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bkgd_4.png-959fe23b749ebb841b1bbfcaefa6000c.stex"
+path="res://.import/bkgd_3.png-e52e7d752967251a835f78595971b6d3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bkgd_4.png"
-dest_files=[ "res://.import/bkgd_4.png-959fe23b749ebb841b1bbfcaefa6000c.stex" ]
+source_file="res://universe/bkgd_3.png"
+dest_files=[ "res://.import/bkgd_3.png-e52e7d752967251a835f78595971b6d3.stex" ]
 
 [params]
 

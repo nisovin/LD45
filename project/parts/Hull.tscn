@@ -1,24 +1,26 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://parts/Part.gd" type="Script" id=1]
-[ext_resource path="res://square.png" type="Texture" id=2]
-[ext_resource path="res://circle.png" type="Texture" id=3]
-[ext_resource path="res://pentagon.png" type="Texture" id=4]
+[ext_resource path="res://parts/square.png" type="Texture" id=2]
+[ext_resource path="res://parts/circle.png" type="Texture" id=3]
+[ext_resource path="res://parts/pentagon.png" type="Texture" id=4]
 
-[sub_resource type="PhysicsMaterial" id=3]
+[sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 22, 22 )
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 22.0
 
 [node name="Hull" type="RigidBody2D" groups=[
 "parts",
 ]]
+collision_layer = 2
+collision_mask = 19
 mass = 10.0
-physics_material_override = SubResource( 3 )
+physics_material_override = SubResource( 1 )
 contacts_reported = 1
 contact_monitor = true
 linear_damp = 0.0
@@ -26,13 +28,13 @@ angular_damp = 0.0
 script = ExtResource( 1 )
 
 [node name="Square" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Square"]
 texture = ExtResource( 2 )
 
 [node name="Circle" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Circle"]
 texture = ExtResource( 3 )

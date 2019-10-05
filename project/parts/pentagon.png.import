@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/square.png-51b8b31f216285d75f625619e7157806.stex"
+path="res://.import/pentagon.png-632f849e398ba46b4682dd7fafe2c71d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://square.png"
-dest_files=[ "res://.import/square.png-51b8b31f216285d75f625619e7157806.stex" ]
+source_file="res://parts/pentagon.png"
+dest_files=[ "res://.import/pentagon.png-632f849e398ba46b4682dd7fafe2c71d.stex" ]
 
 [params]
 
