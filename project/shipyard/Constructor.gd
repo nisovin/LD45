@@ -2,8 +2,6 @@ extends Node2D
 
 onready var spawn_obj_pos = $Base/Position2D
 
-var speed = 100
-
 func set_spawn_object(node):
 	if spawn_obj_pos.get_child_count() > 0:
 		spawn_obj_pos.get_child(0).queue_free()

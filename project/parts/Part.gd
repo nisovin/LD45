@@ -1,10 +1,13 @@
 extends RigidBody2D
 
 var dead = false
+var ship_controller = null
+var layer = 0
+var mask = 0
 
 func _ready():
 	print("ready")
-	connect("body_entered", self, "_on_part_collision")
+	connect("body_shape_entered", self, "_on_part_collision")
 
 func init(type = null, color = null):
 	var shape
@@ -15,6 +18,7 @@ func init(type = null, color = null):
 			if child.name == type:
 				shape = child
 			else:
+				child.visible = false
 				child.queue_free()
 	else:
 		shape = get_child(0)
@@ -31,14 +35,16 @@ func _recurse_color(node, color):
 func set_static():
 	mode = RigidBody2D.MODE_STATIC
 	contact_monitor = false
+	layer = collision_layer
+	mask = collision_mask
 	collision_layer = 0
 	collision_mask = 0
 	
 func set_rigid():
 	mode = RigidBody2D.MODE_RIGID
 	contact_monitor = true
-	collision_layer = 1
-	collision_mask = 1
+	collision_layer = layer
+	collision_mask = mask
 	
 func glob_onto(projectile):
 	mass += projectile.mass
@@ -51,6 +57,7 @@ func glob_onto(projectile):
 		call_deferred("add_part", copy, pos + dir, rot)
 	projectile.queue_free()
 	projectile.dead = true
+	update()
 	print("ok")
 	
 func add_part(part, pos, rot):
@@ -58,10 +65,33 @@ func add_part(part, pos, rot):
 	part.global_position = pos
 	part.global_rotation = rot
 
-func _on_part_collision(body):
+func _on_part_collision(body_id, body, body_shape, local_shape):
 	print("collide")
-	if body.is_in_group("parts") and !dead and !body.dead:
-		if body.mass > mass:
-			body.glob_onto(self)
-		else:
-			glob_onto(body)
+	if !Game.ship_launched:
+		if body.is_in_group("parts") and !dead and !body.dead:
+			if body.mass > mass:
+				body.glob_onto(self)
+			else:
+				glob_onto(body)
+	else:
+		if body.is_in_group("enemy_bullets"):
+			var owner_id = shape_find_owner(local_shape)
+			var owner = shape_owner_get_owner(owner_id)
+			body.queue_free()
+			var part = owner.get_child(0)
+			if part.has_method("hit"):
+				part.hit()
+			print("shot ", local_shape, " ", owner_id, " ", owner)
+
+func _draw():
+	for i in get_child_count():
+		var a = get_child(i)
+		if a is CollisionShape2D or a is CollisionPolygon2D:
+			var j = i + 1
+			while j < get_child_count():
+				var b = get_child(j)
+				if b is CollisionShape2D or b is CollisionPolygon2D:
+					if a.position.distance_squared_to(b.position) < 15000:
+						draw_line(a.position, b.position, Color(0.2, 0.2, 0.2, 0.7), 6, true)
+				j += 1
+			draw_circle(a.position, 10, Color(0.3, 0.3, 0.3, 0.9))

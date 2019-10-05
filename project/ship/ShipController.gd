@@ -4,16 +4,24 @@ const Bullet = preload("res://ship/Bullet.tscn")
 
 var ship : RigidBody2D
 
-var thrust_per_thruster = 1000
+var thrust_per_thruster = 2000
 
 var last_fired = 0
+var center := Vector2.ZERO
 
 func init():
 	ship = get_parent()
+	ship.ship_controller = self
+	calculate_center()
+	position = center
+	
+func calculate_center():
 	var total = Vector2.ZERO
 	for child in ship.get_children():
-		total += child.position
-	position = total / ship.get_child_count()
+		if (child is CollisionShape2D or child is CollisionPolygon2D) and !child.has_meta("freed"):
+			total += child.position
+	center = total / (ship.get_child_count() - 1)
+	print("center ", center)
 	
 func _process(delta):
 	if Input.is_action_just_released("thrust"):
@@ -26,7 +34,7 @@ func _process(delta):
 			for turret in get_tree().get_nodes_in_group("turrets"):
 				print(turret)
 				var bullet = Bullet.instance()
-				get_parent().add_child(bullet)
+				get_parent().get_parent().add_child(bullet)
 				bullet.linear_velocity = ship.linear_velocity
 				turret.shoot_bullet(bullet)
 	

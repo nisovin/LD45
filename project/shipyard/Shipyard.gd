@@ -1,5 +1,7 @@
 extends Node2D
 
+signal ship_ready(node)
+
 const Parts = [
 	preload("res://parts/Hull.tscn"),
 	preload("res://parts/Thruster.tscn"),
@@ -12,7 +14,7 @@ onready var constructor_pather = $Path2D/PathFollow2D
 onready var constructor = $Path2D/PathFollow2D/Constructor
 
 var constructor_speed = 500
-var part_launch_speed = 1000
+var part_launch_speed = 3000
 
 var current_part = 0
 var movement_dir = 0
@@ -58,7 +60,15 @@ func launch_ship():
 		$Cage.queue_free()
 		$Path2D.queue_free()
 		most_massive.linear_velocity = Vector2.ZERO
-	set_process(false)
+		most_massive.angular_damp = -1
+		most_massive.linear_damp = -1
+		set_process(false)
+		Game.ship_launched = true
+		Game.ship = most_massive
+		most_massive.update()
+	
+func destroy_shipyard():
+	pass
 
 func _process(delta):
 	if Input.is_action_just_pressed("fire") or Input.is_action_just_pressed("thrust"):

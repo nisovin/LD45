@@ -1,25 +1,39 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://parts/thruster_base.png" type="Texture" id=1]
 [ext_resource path="res://parts/thruster.png" type="Texture" id=2]
 [ext_resource path="res://parts/Thruster.gd" type="Script" id=3]
 [ext_resource path="res://parts/Part.gd" type="Script" id=4]
+[ext_resource path="res://ship/smoke.png" type="Texture" id=5]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
 
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
 [sub_resource type="ParticlesMaterial" id=2]
 flag_disable_z = true
-gravity = Vector3( 0, 98, 0 )
+spread = 2.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+angular_velocity = 25.0
+angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+angle = 90.0
+angle_random = 1.0
+color_ramp = SubResource( 4 )
 
 [node name="Thruster" type="RigidBody2D" groups=[
 "parts",
 ]]
 collision_layer = 2
-collision_mask = 19
-mass = 5.0
+collision_mask = 27
+mass = 10.0
 physics_material_override = SubResource( 1 )
 contacts_reported = 1
 contact_monitor = true
@@ -28,7 +42,8 @@ angular_damp = 0.0
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 18.2388, -23.2177, 18.3966, 22.8539, 0.684227, 23.329, -15.5957, 0.0835018, 0.74181, -23.2193 )
+position = Vector2( 35, 0 )
+polygon = PoolVector2Array( 19.0432, -22.4827, 19.0743, 22.1509, -0.886818, 22.1937, -16.3326, -0.0614548, 0.10968, -22.3166 )
 
 [node name="ThrusterBase" type="Sprite" parent="CollisionShape2D" groups=[
 "thrusters",
@@ -39,14 +54,20 @@ script = ExtResource( 3 )
 [node name="Thruster" type="Sprite" parent="CollisionShape2D/ThrusterBase"]
 modulate = Color( 0.4, 0.4, 0.4, 1 )
 texture = ExtResource( 2 )
-offset = Vector2( -20, 0 )
+offset = Vector2( -26, 0 )
 
 [node name="ClearanceRayCast" type="RayCast2D" parent="CollisionShape2D/ThrusterBase/Thruster"]
 exclude_parent = false
 cast_to = Vector2( -150, 0 )
 
 [node name="Particles2D" type="Particles2D" parent="CollisionShape2D/ThrusterBase/Thruster"]
-position = Vector2( -40, 0 )
-rotation = 1.5708
+show_behind_parent = true
+position = Vector2( -50, 0 )
+rotation = 3.14159
 emitting = false
+amount = 25
+lifetime = 1.5
+randomness = 1.0
+local_coords = false
 process_material = SubResource( 2 )
+texture = ExtResource( 5 )

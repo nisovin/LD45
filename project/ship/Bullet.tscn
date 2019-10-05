@@ -6,9 +6,12 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.42833
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D" groups=[
+"player_bullets",
+]]
 collision_layer = 4
-collision_mask = 16
+collision_mask = 0
+linear_damp = 0.0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
