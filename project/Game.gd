@@ -20,3 +20,8 @@ var score = 0
 func _ready():
 	randomize()
 	randomize()
+
+func _input(event):
+	if event.is_action_pressed("fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+		

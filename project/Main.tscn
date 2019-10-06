@@ -184,7 +184,6 @@ align = 1
 valign = 1
 
 [node name="CreditsPopup" type="PopupPanel" parent="MainGUI/Control"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -228,6 +227,7 @@ bbcode_text = "[center]
 [color=#a0a0a0]
 Game created by Nisovin
 License: [url=https://opensource.org/licenses/MIT]MIT[/url]
+Source: [url=https://github.com/nisovin/LD45/]Github[/url]
 [url=http://nisovin.com]nisovin.com[/url]
 Made during Ludum Dare 45 (Oct 2019)
 [/color]
@@ -295,6 +295,7 @@ text = "
 
 Game created by Nisovin
 License: MIT
+Source: Github
 nisovin.com
 Made during Ludum Dare 45 (Oct 2019)
 

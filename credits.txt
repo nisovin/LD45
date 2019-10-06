@@ -4,6 +4,7 @@
 [color=#a0a0a0]
 Game created by Nisovin
 License: [url=https://opensource.org/licenses/MIT]MIT[/url]
+Source: [url=https://github.com/nisovin/LD45/]Github[/url]
 [url=http://nisovin.com]nisovin.com[/url]
 Made during Ludum Dare 45 (Oct 2019)
 [/color]
