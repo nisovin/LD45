@@ -5,6 +5,7 @@ onready var clearance = $Thruster/ClearanceRayCast
 onready var particles = $Thruster/Particles2D
 
 var ok_to_fire = false
+var last_fired = 0
 var max_hit_points = 10
 var hit_points = max_hit_points
 

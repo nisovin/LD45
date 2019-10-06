@@ -2,6 +2,8 @@ extends Node2D
 
 signal ship_ready(node)
 
+const constructor_speed = 500
+const part_launch_speed = 3000
 var parts = [
 	Game.Hull,
 	Game.Thruster,
@@ -13,22 +15,45 @@ onready var constructor_path_legth = $Path2D.curve.get_baked_length()
 onready var constructor_pather = $Path2D/PathFollow2D
 onready var constructor = $Path2D/PathFollow2D/Constructor
 
-var constructor_speed = 500
-var part_launch_speed = 3000
+var released = false
+var moved = false
+var switched = false
+var launched = false
 
 var current_part = 0
 var movement_dir = 0
+var remaining_parts = [ 15, 10, 8 ]
 
 func _ready():
+	gui.set_hull_count(remaining_parts[0])
+	gui.set_thruster_count(remaining_parts[1])
+	gui.set_turret_count(remaining_parts[2])
 	yield(get_tree(), "idle_frame")
 	prepare_next_part()
+	start_hint_timers()
+	
+func start_hint_timers():
+	yield(get_tree().create_timer(3), "timeout")
+	if !released:
+		gui.show_release_hint()
+	yield(get_tree().create_timer(6), "timeout")
+	if !moved:
+		gui.show_move_hint()
+	yield(get_tree().create_timer(6), "timeout")
+	if !switched:
+		gui.show_switch_hint()
+	yield(get_tree().create_timer(20), "timeout")
+	if !launched:
+		gui.show_launch_hint()
+	
 
 func prepare_next_part():
-	var obj = parts[current_part].instance()
-	obj.init()
-	obj.set_static()
-	constructor.set_spawn_object(obj)
-	AudioManager.play_sound("part_appear")
+	if remaining_parts[current_part] > 0:
+		var obj = parts[current_part].instance()
+		obj.init()
+		obj.set_static()
+		constructor.set_spawn_object(obj)
+		AudioManager.play_sound("part_appear")
 
 func launch_part(obj):
 	var pos = obj.global_position
@@ -40,6 +65,13 @@ func launch_part(obj):
 	obj.set_rigid()
 	obj.apply_central_impulse(constructor.get_launch_direction() * part_launch_speed)
 	AudioManager.play_sound("part_release")
+	remaining_parts[current_part] -= 1
+	if current_part == 0:
+		gui.set_hull_count(remaining_parts[current_part])
+	elif current_part == 1:
+		gui.set_thruster_count(remaining_parts[current_part])
+	elif current_part == 2:
+		gui.set_turret_count(remaining_parts[current_part])
 	yield(get_tree().create_timer(0.5), "timeout")
 	prepare_next_part()
 	
@@ -68,21 +100,25 @@ func _process(delta):
 	
 func _process_actions(delta):
 	if Input.is_action_just_pressed("fire") or Input.is_action_just_pressed("thrust"):
-		print("fire!")
+		released = true
 		var obj = constructor.get_spawn_object()
 		if obj != null:
 			launch_part(obj)
 		
 	if Input.is_action_just_pressed("launch_ship"):
+		launched = true
 		call_deferred("launch_ship")
 		
 	if Input.is_action_just_pressed("part_hull"):
+		switched = true
 		current_part = 0
 		prepare_next_part()
 	if Input.is_action_just_pressed("part_thruster"):
+		switched = true
 		current_part = 1
 		prepare_next_part()
 	if Input.is_action_just_pressed("part_turret"):
+		switched = true
 		current_part = 2
 		prepare_next_part()
 	
@@ -100,21 +136,25 @@ func _process_movement(delta):
 		side = "bottom"
 		
 	if Input.is_action_just_pressed("move_right"):
+		moved = true
 		if side == "top":
 			movement_dir = -1
 		else:
 			movement_dir = 1
 	if Input.is_action_just_pressed("move_left"):
+		moved = true
 		if side == "top":
 			movement_dir = 1
 		else:
 			movement_dir = -1
 	if Input.is_action_just_pressed("move_up"):
+		moved = true
 		if side == "left":
 			movement_dir = -1
 		else:
 			movement_dir = 1
 	if Input.is_action_just_pressed("move_down"):
+		moved = true
 		if side == "left":
 			movement_dir = 1
 		else:

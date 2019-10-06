@@ -1,5 +1,7 @@
 extends Node2D
 
+const angle_range = 45
+
 onready var spawn_obj_pos = $Base/Position2D
 
 func set_spawn_object(node):
@@ -18,8 +20,8 @@ func get_launch_direction():
 
 func _process(delta):
 	$Base.look_at(get_global_mouse_position())
-	if $Base.rotation_degrees > 30:
-		$Base.rotation_degrees = 30
-	elif $Base.rotation_degrees < -30:
-		$Base.rotation_degrees = -30
+	if $Base.rotation_degrees > angle_range:
+		$Base.rotation_degrees = angle_range
+	elif $Base.rotation_degrees < -angle_range:
+		$Base.rotation_degrees = -angle_range
 	

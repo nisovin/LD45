@@ -1,8 +1,8 @@
 extends Node2D
 
-const min_spawn_distance = 2000
-const max_spawn_distance = 3000
-const despawn_distance_sq = 3500 * 3500
+const min_spawn_distance = 1200
+const max_spawn_distance = 2000
+const despawn_distance_sq = 2200 * 2200
 const max_turrets = 100
 
 const min_spacing_initial = 300
@@ -23,6 +23,10 @@ func _ready():
 	$DifficultyTimer.start()
 
 func reset():
+	for turret in turrets.get_children():
+		turret.queue_free()
+
+func initial_spawn():
 	pass
 
 func spawn_turret():
@@ -38,7 +42,6 @@ func spawn_turret():
 	var turret = Game.EnemyTurret.instance()
 	turrets.add_child(turret)
 	turret.global_position = pos
-	print("spawn", turrets.get_child_count())
 	return true
 
 func _on_spawn_timer():
@@ -53,10 +56,8 @@ func _on_spawn_timer():
 		for turret in turrets.get_children():
 			if turret.global_position.distance_squared_to(pos) > despawn_distance_sq:
 				turret.queue_free()
-				print("delete", turrets.get_child_count())
 
 func _on_difficulty_timer():
-	print("diff")
 	min_spacing -= min_spacing_interval
 	if min_spacing < min_spacing_min:
 		min_spacing = min_spacing_min
