@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Game="*res://Game.gd"
+AudioManager="*res://AudioManager.tscn"
 
 [display]
 

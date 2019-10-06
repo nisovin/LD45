@@ -59,8 +59,10 @@ offset = Vector2( -26, 0 )
 [node name="ClearanceRayCast" type="RayCast2D" parent="CollisionShape2D/ThrusterBase/Thruster"]
 exclude_parent = false
 cast_to = Vector2( -150, 0 )
+collision_mask = 2
 
 [node name="Particles2D" type="Particles2D" parent="CollisionShape2D/ThrusterBase/Thruster"]
+self_modulate = Color( 2, 2, 2, 1 )
 show_behind_parent = true
 position = Vector2( -50, 0 )
 rotation = 3.14159

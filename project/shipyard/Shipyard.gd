@@ -2,13 +2,13 @@ extends Node2D
 
 signal ship_ready(node)
 
-const Parts = [
-	preload("res://parts/Hull.tscn"),
-	preload("res://parts/Thruster.tscn"),
-	preload("res://parts/Turret.tscn")
+var parts = [
+	Game.Hull,
+	Game.Thruster,
+	Game.Turret
 ]
-const ShipController = preload("res://ship/ShipController.tscn")
 
+onready var gui = $ShipyardGUI
 onready var constructor_path_legth = $Path2D.curve.get_baked_length()
 onready var constructor_pather = $Path2D/PathFollow2D
 onready var constructor = $Path2D/PathFollow2D/Constructor
@@ -20,16 +20,15 @@ var current_part = 0
 var movement_dir = 0
 
 func _ready():
-	randomize()
-	
 	yield(get_tree(), "idle_frame")
 	prepare_next_part()
 
 func prepare_next_part():
-	var obj = Parts[current_part].instance()
+	var obj = parts[current_part].instance()
 	obj.init()
 	obj.set_static()
 	constructor.set_spawn_object(obj)
+	AudioManager.play_sound("part_appear")
 
 func launch_part(obj):
 	var pos = obj.global_position
@@ -40,6 +39,7 @@ func launch_part(obj):
 	obj.global_rotation = rot
 	obj.set_rigid()
 	obj.apply_central_impulse(constructor.get_launch_direction() * part_launch_speed)
+	AudioManager.play_sound("part_release")
 	yield(get_tree().create_timer(0.5), "timeout")
 	prepare_next_part()
 	
@@ -54,23 +54,19 @@ func launch_ship():
 		if child != most_massive:
 			child.queue_free()
 	if most_massive != null:
-		var ship_controller = ShipController.instance()
-		most_massive.add_child(ship_controller)
-		ship_controller.init()
-		$Cage.queue_free()
-		$Path2D.queue_free()
-		most_massive.linear_velocity = Vector2.ZERO
-		most_massive.angular_damp = -1
-		most_massive.linear_damp = -1
-		set_process(false)
-		Game.ship_launched = true
-		Game.ship = most_massive
-		most_massive.update()
+		emit_signal("ship_ready", most_massive)
 	
-func destroy_shipyard():
-	pass
+func destroy():
+	set_process(false)
+	$Cage.queue_free()
+	$Path2D.queue_free()
+	queue_free()
 
 func _process(delta):
+	_process_actions(delta)
+	_process_movement(delta)
+	
+func _process_actions(delta):
 	if Input.is_action_just_pressed("fire") or Input.is_action_just_pressed("thrust"):
 		print("fire!")
 		var obj = constructor.get_spawn_object()
@@ -90,6 +86,8 @@ func _process(delta):
 		current_part = 2
 		prepare_next_part()
 	
+	
+func _process_movement(delta):
 	var facing = constructor.global_transform.x
 	var side = "?"
 	if facing.x > 0.9:

@@ -2,6 +2,5 @@
 
 [ext_resource path="res://ship/ShipController.gd" type="Script" id=1]
 
-[node name="ShipController" type="Camera2D"]
-current = true
+[node name="ShipController" type="Node2D"]
 script = ExtResource( 1 )

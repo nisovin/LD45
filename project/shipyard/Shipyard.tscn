@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://shipyard/Constructor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shipyard/ShipyardGUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://shipyard/Shipyard.gd" type="Script" id=3]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 8.89187, 714.194, 0, 0, 0, 0, 1262.98, 714.194, 0, 0, 0, 0, 1264.26, 6.60522, 0, 0, 0, 0, 10, 10 )
+"points": PoolVector2Array( 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 8.89187, 714.194, 0, 0, 0, 0, 1263.41, 711.241, 0, 0, 0, 0, 1263.11, 9.63132, 0, 0, 0, 0, 10, 10 )
 }
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -17,13 +18,16 @@ extents = Vector2( 645.136, 10 )
 [node name="Shipyard" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="ShipyardGUI" parent="." instance=ExtResource( 2 )]
+
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2( -3.59715, -2.67505 )
-scale = Vector2( 1.01094, 1.00453 )
+position = Vector2( -4.73724, 45.3979 )
+scale = Vector2( 1.01184, 0.937223 )
 curve = SubResource( 1 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 646.964, 714.194 )
+position = Vector2( 650.493, 712.684 )
+rotation = -0.00234589
 offset = 1342.74
 
 [node name="Constructor" parent="Path2D/PathFollow2D" instance=ExtResource( 1 )]
@@ -38,7 +42,7 @@ position = Vector2( -10.5485, 304.149 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/StaticBody2D"]
-position = Vector2( 0, 56.8638 )
+position = Vector2( 13.5661, 68.9225 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Cage"]
@@ -46,7 +50,7 @@ position = Vector2( 1035.51, 307.665 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/StaticBody2D2"]
-position = Vector2( 254.595, 51.6943 )
+position = Vector2( 239.521, 57.7237 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Cage"]
@@ -54,7 +58,7 @@ position = Vector2( 544.435, 609.188 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/StaticBody2D3"]
-position = Vector2( 95.6345, 121.482 )
+position = Vector2( 97.1419, 103.394 )
 shape = SubResource( 3 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Cage"]
@@ -62,5 +66,5 @@ position = Vector2( 541.979, -9.59241 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/StaticBody2D4"]
-position = Vector2( 99.5116, 0 )
+position = Vector2( 102.526, 64.8158 )
 shape = SubResource( 3 )

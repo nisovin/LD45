@@ -1,12 +1,15 @@
 extends RigidBody2D
 
+const min_color_value = 0.3
+const max_color_value = 0.7
+
 var dead = false
 var ship_controller = null
 var layer = 0
 var mask = 0
+var current_color
 
 func _ready():
-	print("ready")
 	connect("body_shape_entered", self, "_on_part_collision")
 
 func init(type = null, color = null):
@@ -23,14 +26,25 @@ func init(type = null, color = null):
 	else:
 		shape = get_child(0)
 	if color == null:
-		color = Color.white.from_hsv(randf(), 0.9, 0.7)
+		color = Color.white.from_hsv(randf(), 0.9, max_color_value)
+	current_color = color
 	_recurse_color(shape, color)
+	
+func set_color_percent(percent, shape):
+	var v = (percent * (max_color_value - min_color_value)) + min_color_value
+	_recurse_color_v(shape, v)
 	
 func _recurse_color(node, color):
 	if node is Sprite:
 		node.modulate = color
 	for child in node.get_children():
 		_recurse_color(child, color)
+		
+func _recurse_color_v(node, v):
+	if node is Sprite:
+		node.modulate.v = v
+	for child in node.get_children():
+		_recurse_color_v(child, v)
 	
 func set_static():
 	mode = RigidBody2D.MODE_STATIC
@@ -46,19 +60,19 @@ func set_rigid():
 	collision_layer = layer
 	collision_mask = mask
 	
-func glob_onto(projectile):
-	mass += projectile.mass
-	var dir = projectile.linear_velocity.normalized() * 5
+func glob_onto(part):
+	mass += part.mass
+	var dir = part.linear_velocity.normalized() * 5
 	dir += linear_velocity.normalized() * -2
-	for child in projectile.get_children():
+	for child in part.get_children():
 		var pos = child.global_position
 		var rot = child.global_rotation
 		var copy = child.duplicate()
 		call_deferred("add_part", copy, pos + dir, rot)
-	projectile.queue_free()
-	projectile.dead = true
+	part.queue_free()
+	part.dead = true
+	AudioManager.play_sound("part_attach")
 	update()
-	print("ok")
 	
 func add_part(part, pos, rot):
 	add_child(part)
@@ -66,22 +80,22 @@ func add_part(part, pos, rot):
 	part.global_rotation = rot
 
 func _on_part_collision(body_id, body, body_shape, local_shape):
-	print("collide")
-	if !Game.ship_launched:
+	if Game.game_state == Game.STATE_BUILDING:
 		if body.is_in_group("parts") and !dead and !body.dead:
 			if body.mass > mass:
 				body.glob_onto(self)
 			else:
 				glob_onto(body)
-	else:
+	elif Game.game_state == Game.STATE_LAUNCHED:
 		if body.is_in_group("enemy_bullets"):
 			var owner_id = shape_find_owner(local_shape)
 			var owner = shape_owner_get_owner(owner_id)
 			body.queue_free()
 			var part = owner.get_child(0)
 			if part.has_method("hit"):
-				part.hit()
-			print("shot ", local_shape, " ", owner_id, " ", owner)
+				var percent = part.hit()
+				set_color_percent(percent, part)
+				AudioManager.play_sound("hit")
 
 func _draw():
 	for i in get_child_count():
