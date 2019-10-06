@@ -1,0 +1,66 @@
+[center]
+
+[color=white][ GAME ][/color]
+[color=#a0a0a0]
+Game created by Nisovin
+License: [url=https://opensource.org/licenses/MIT]MIT[/url]
+[url=http://nisovin.com]nisovin.com[/url]
+Made during Ludum Dare 45 (Oct 2019)
+[/color]
+
+[color=white][ ART ][/color]
+[color=#a0a0a0]
+Most art created by Nisovin
+
+Parallax Space Scene - By LuminousDragonGames
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://opengameart.org/content/parallax-space-scene-seamlessly-scrolls-too](found on opengameart.org)[/url]
+
+Kenney Future Narrow (font) - By Kenney
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://kenney.nl/assets/kenney-fonts](found on kenney.nl)[/url]
+[/color]
+
+[color=white][ SOUND EFFECTS ][/color]
+[color=#a0a0a0]
+Digital Audio - By Kenney
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://kenney.nl/assets/digital-audio](found on kenney.nl)[/url]
+
+UI Audio - By Kenney
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://kenney.nl/assets/ui-audio](found on kenney.nl)[/url]
+
+50 CC0 retro / synth SFX - By rubberduck
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://opengameart.org/content/50-cc0-retro-synth-sfx](found on opengameart.org)[/url]
+
+Energy Drain - By qubodup
+License: [url=https://creativecommons.org/licenses/by-sa/3.0/]CC-BY-SA 3.0[/url]
+[url=https://opengameart.org/content/50-cc0-retro-synth-sfx](found on opengameart.org)[/url]
+
+Thrusters Loop - By DJT4NN3R
+License: [url=https://creativecommons.org/licenses/by-sa/3.0/]CC-BY-SA 3.0[/url]
+[url=https://freesound.org/people/DJT4NN3R/sounds/347576/](found on freesound.org)[/url]
+
+4 projectile launches - By Michel Baradari
+License: [url=https://creativecommons.org/licenses/by/3.0/]CC-BY 3.0[/url]
+[url=https://opengameart.org/content/4-projectile-launches](found on opengameart.org)[/url]
+[/color]
+
+[color=white][ MUSIC ][/color]
+[color=#a0a0a0]
+Music from https://filmmusic.io
+"Inspired" by Kevin MacLeod (https://incompetech.com)
+"Werq" by Kevin MacLeod (https://incompetech.com)
+License: CC BY (http://creativecommons.org/licenses/by/4.0/)
+[/color]
+
+[color=white][ ENGINE ][/color]
+[color=#a0a0a0]
+Godot Engine
+License: [url=https://opensource.org/licenses/MIT]MIT[/url]
+[url=https://godotengine.org/]godotengine.org[/url]
+[/color]
+
+[/center]

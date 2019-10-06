@@ -214,7 +214,7 @@ custom_constants/margin_top = 5
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainGUI/Control/CreditsPopup/VBoxContainer/MarginContainer"]
+[node name="CreditsText" type="RichTextLabel" parent="MainGUI/Control/CreditsPopup/VBoxContainer/MarginContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 995.0
@@ -227,6 +227,9 @@ bbcode_text = "[center]
 [color=white][ GAME ][/color]
 [color=#a0a0a0]
 Game created by Nisovin
+License: [url=https://opensource.org/licenses/MIT]MIT[/url]
+[url=http://nisovin.com]nisovin.com[/url]
+Made during Ludum Dare 45 (Oct 2019)
 [/color]
 
 [color=white][ ART ][/color]
@@ -275,8 +278,15 @@ Music from https://filmmusic.io
 \"Inspired\" by Kevin MacLeod (https://incompetech.com)
 \"Werq\" by Kevin MacLeod (https://incompetech.com)
 License: CC BY (http://creativecommons.org/licenses/by/4.0/)
-
 [/color]
+
+[color=white][ ENGINE ][/color]
+[color=#a0a0a0]
+Godot Engine
+License: [url=https://opensource.org/licenses/MIT]MIT[/url]
+[url=https://godotengine.org/]godotengine.org[/url]
+[/color]
+
 [/center]
 "
 text = "
@@ -284,6 +294,9 @@ text = "
 [ GAME ]
 
 Game created by Nisovin
+License: MIT
+nisovin.com
+Made during Ludum Dare 45 (Oct 2019)
 
 
 [ ART ]
@@ -332,6 +345,13 @@ Music from https://filmmusic.io
 \"Inspired\" by Kevin MacLeod (https://incompetech.com)
 \"Werq\" by Kevin MacLeod (https://incompetech.com)
 License: CC BY (http://creativecommons.org/licenses/by/4.0/)
+
+
+[ ENGINE ]
+
+Godot Engine
+License: MIT
+godotengine.org
 
 
 

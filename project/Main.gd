@@ -14,6 +14,7 @@ func _ready():
 	start_button.connect("pressed", self, "start_game")
 	$MainGUI/Control/MainMenu/CreditsButton.connect("pressed", self, "show_credits")
 	$MainGUI/Control/CreditsPopup/VBoxContainer/HBoxContainer/MarginContainer/CloseButton.connect("pressed", self, "hide_credits")
+	$MainGUI/Control/CreditsPopup/VBoxContainer/MarginContainer/CreditsText.connect("meta_clicked", self, "open_credits_link")
 	$MainGUI/Control/MainMenu/QuitButton.connect("pressed", self, "quit_game")
 	AudioManager.fade_music("main", "in")
 	
@@ -97,6 +98,10 @@ func end_game():
 
 func show_credits():
 	$MainGUI/Control/CreditsPopup.popup_centered()
+	
+func open_credits_link(meta):
+	OS.shell_open(meta)
+	print(meta)
 	
 func hide_credits():
 	$MainGUI/Control/CreditsPopup.hide()

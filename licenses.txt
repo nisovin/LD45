@@ -1,56 +1,35 @@
-[center]
 
-[color=white][ GAME ][/color]
-[color=#a0a0a0]
-Game created by Nisovin
-[/color]
+This game uses the MIT license:
 
-[color=white][ ART ][/color]
-[color=#a0a0a0]
-Most art created by Nisovin
+Copyright 2019 nisovin (Justin Baker)
 
-Parallax Space Scene - By LuminousDragonGames
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
-[url=https://opengameart.org/content/parallax-space-scene-seamlessly-scrolls-too](found on opengameart.org)[/url]
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-Kenney Future Narrow (font) - By Kenney
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
-[url=https://kenney.nl/assets/kenney-fonts](found on kenney.nl)[/url]
-[/color]
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-[color=white][ SOUND EFFECTS ][/color]
-[color=#a0a0a0]
-Digital Audio - By Kenney
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
-[url=https://kenney.nl/assets/digital-audio](found on kenney.nl)[/url]
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-UI Audio - By Kenney
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
-[url=https://kenney.nl/assets/ui-audio](found on kenney.nl)[/url]
+---
 
-50 CC0 retro / synth SFX - By rubberduck
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
-[url=https://opengameart.org/content/50-cc0-retro-synth-sfx](found on opengameart.org)[/url]
+This game uses Godot Engine, available under the following license:
 
-Energy Drain - By qubodup
-License: [url=https://creativecommons.org/licenses/by-sa/3.0/]CC-BY-SA 3.0[/url]
-[url=https://opengameart.org/content/50-cc0-retro-synth-sfx](found on opengameart.org)[/url]
+Copyright (c) 2007-2019 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2019 Godot Engine contributors.
 
-Thrusters Loop - By DJT4NN3R
-License: [url=https://creativecommons.org/licenses/by-sa/3.0/]CC-BY-SA 3.0[/url]
-[url=https://freesound.org/people/DJT4NN3R/sounds/347576/](found on freesound.org)[/url]
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-4 projectile launches - By Michel Baradari
-License: [url=https://creativecommons.org/licenses/by/3.0/]CC-BY 3.0[/url]
-[url=https://opengameart.org/content/4-projectile-launches](found on opengameart.org)[/url]
-[/color]
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-[color=white][ MUSIC ][/color]
-[color=#a0a0a0]
-Music from https://filmmusic.io
-"Inspired" by Kevin MacLeod (https://incompetech.com)
-"Werq" by Kevin MacLeod (https://incompetech.com)
-License: CC BY (http://creativecommons.org/licenses/by/4.0/)
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[/color]
-[/center]
+---
+
+Portions of this software are copyright © The FreeType Project (www.freetype.org). All rights reserved.
+
+---
+
+Some assets of this software are licensed under the following licenses (see credits.txt):
+
+CC0: https://creativecommons.org/publicdomain/zero/1.0/
+CC-BY 3.0: https://creativecommons.org/licenses/by/3.0/
+CC-BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/
+
