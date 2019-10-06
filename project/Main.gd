@@ -22,8 +22,6 @@ func _ready():
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseMainMenu.connect("pressed", self, "end_from_menu")
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseQuit.connect("pressed", self, "quit_game")
 	AudioManager.fade_music("main", "in")
-	tween.interpolate_property(overlay, "modulate:a", 1, 0, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.start()
 	
 func _input(event):
 	if event.is_action_pressed("pause"):

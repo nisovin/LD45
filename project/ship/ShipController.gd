@@ -53,7 +53,7 @@ func calculate_center():
 		emit_signal("ship_dead")
 	
 func enemy_killed(enemy):
-	score += 1
+	score += enemy.max_health
 	score_label.text = str(score)
 	
 func _process(delta):
