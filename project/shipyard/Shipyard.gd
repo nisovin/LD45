@@ -2,7 +2,7 @@ extends Node2D
 
 signal ship_ready(node)
 
-const constructor_speed = 500
+const constructor_speed = 800
 const part_launch_speed = 3000
 var parts = [
 	Game.Hull,
@@ -21,8 +21,11 @@ var switched = false
 var launched = false
 
 var current_part = 0
-var movement_dir = 0
 var remaining_parts = [ 15, 10, 8 ]
+
+var movement_dir = 0
+var last_pressed = ""
+var last_dir = 0
 
 func _ready():
 	gui.set_hull_count(remaining_parts[0])
@@ -34,17 +37,17 @@ func _ready():
 	
 func start_hint_timers():
 	yield(get_tree().create_timer(3), "timeout")
-	if !released:
-		gui.show_release_hint()
+	if !released and Game.game_state == Game.STATE_BUILDING:
+		GlobalGUI.show_hint("Click to release part")
 	yield(get_tree().create_timer(6), "timeout")
-	if !moved:
-		gui.show_move_hint()
+	if !moved and Game.game_state == Game.STATE_BUILDING:
+		GlobalGUI.show_hint("Use WASD to move")
 	yield(get_tree().create_timer(6), "timeout")
-	if !switched:
-		gui.show_switch_hint()
+	if !switched and Game.game_state == Game.STATE_BUILDING:
+		GlobalGUI.show_hint("Press 1, 2, 3 to switch parts")
 	yield(get_tree().create_timer(20), "timeout")
-	if !launched:
-		gui.show_launch_hint()
+	if !launched and Game.game_state == Game.STATE_BUILDING:
+		GlobalGUI.show_hint("Press L to launch")
 	
 
 func prepare_next_part():
@@ -90,8 +93,27 @@ func launch_ship():
 	
 func destroy():
 	set_process(false)
+	# remove cage
 	$Cage.queue_free()
-	$Path2D.queue_free()
+	# animate rails
+	var tween = $Tween
+	var top = $Rails/Top
+	var bottom = $Rails/Bottom
+	var left = $Rails/Left
+	var right = $Rails/Right
+	var constructor = $Path2D/PathFollow2D/Constructor
+	tween.interpolate_property(top, "rect_position:y", top.rect_position.y, top.rect_position.y - 200, 10, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(bottom, "rect_position:y", bottom.rect_position.y, bottom.rect_position.y + 200, 10, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(left, "rect_position:x", left.rect_position.x, left.rect_position.x - 200, 10, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(right, "rect_position:x", right.rect_position.x, right.rect_position.x + 200, 10, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(top, "modulate:a", 1.0, 0.0, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(bottom, "modulate:a", 1.0, 0.0, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(left, "modulate:a", 1.0, 0.0, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(right, "modulate:a", 1.0, 0.0, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(constructor, "modulate:a", 1.0, 0.0, 1.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
+	# remove
+	yield(get_tree().create_timer(3.2), "timeout")
 	queue_free()
 
 func _process(delta):
@@ -137,28 +159,49 @@ func _process_movement(delta):
 		
 	if Input.is_action_just_pressed("move_right"):
 		moved = true
+		last_pressed = "right"
 		if side == "top":
 			movement_dir = -1
-		else:
+		elif side == "bottom":
 			movement_dir = 1
+		elif side == last_pressed:
+			movement_dir = last_dir
+		else:
+			movement_dir = -last_dir
 	if Input.is_action_just_pressed("move_left"):
 		moved = true
+		last_pressed = "left"
 		if side == "top":
 			movement_dir = 1
-		else:
+		elif side == "bottom":
 			movement_dir = -1
+		elif side == last_pressed:
+			movement_dir = last_dir
+		else:
+			movement_dir = -last_dir
 	if Input.is_action_just_pressed("move_up"):
 		moved = true
+		last_pressed = "up"
 		if side == "left":
 			movement_dir = -1
-		else:
+		elif side == "right":
 			movement_dir = 1
+		elif side == last_pressed:
+			movement_dir = last_dir
+		else:
+			movement_dir = -last_dir
 	if Input.is_action_just_pressed("move_down"):
 		moved = true
+		last_pressed = "down"
 		if side == "left":
 			movement_dir = 1
-		else:
+		elif side == "right":
 			movement_dir = -1
+		elif side == last_pressed:
+			movement_dir = last_dir
+		else:
+			movement_dir = -last_dir
+			
 	if Input.is_action_just_released("move_right"):
 		if !Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_down") and !Input.is_action_pressed("move_up"):
 			movement_dir = 0
@@ -172,4 +215,6 @@ func _process_movement(delta):
 		if !Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_right") and !Input.is_action_pressed("move_up"):
 			movement_dir = 0
 
-	constructor_pather.offset += movement_dir * constructor_speed * delta
+	if movement_dir != 0:
+		last_dir = movement_dir
+		constructor_pather.offset += movement_dir * constructor_speed * delta

@@ -16,8 +16,8 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 anchor_right = 1.0
-margin_top = 15.0
-margin_bottom = 65.0
+margin_top = 5.0
+margin_bottom = 40.0
 custom_constants/separation = 30
 alignment = 1
 __meta__ = {
@@ -25,10 +25,10 @@ __meta__ = {
 }
 
 [node name="HullPanel" type="Panel" parent="Control/HBoxContainer"]
-margin_left = 280.0
-margin_right = 500.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 220, 0 )
+margin_left = 285.0
+margin_right = 465.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 180, 0 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/HullPanel"]
 anchor_right = 1.0
@@ -43,11 +43,11 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Control/HBoxContainer/HullPanel/MarginContainer"]
 margin_left = 10.0
-margin_top = 12.0
-margin_right = 210.0
-margin_bottom = 38.0
+margin_top = 5.0
+margin_right = 170.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 2 )
-text = "(1) Hull"
+text = "[1] Hull"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -55,9 +55,9 @@ __meta__ = {
 
 [node name="Count" type="Label" parent="Control/HBoxContainer/HullPanel/MarginContainer"]
 margin_left = 10.0
-margin_top = 12.0
-margin_right = 210.0
-margin_bottom = 38.0
+margin_top = 5.0
+margin_right = 170.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 2 )
 text = "0"
 align = 2
@@ -67,10 +67,10 @@ __meta__ = {
 }
 
 [node name="ThrusterPanel" type="Panel" parent="Control/HBoxContainer"]
-margin_left = 530.0
-margin_right = 750.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 220, 0 )
+margin_left = 495.0
+margin_right = 745.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 250, 0 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/ThrusterPanel"]
 anchor_right = 1.0
@@ -85,11 +85,11 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Control/HBoxContainer/ThrusterPanel/MarginContainer"]
 margin_left = 10.0
-margin_top = 12.0
-margin_right = 210.0
-margin_bottom = 38.0
+margin_top = 5.0
+margin_right = 240.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 2 )
-text = " (2) Thruster"
+text = "[2] Thruster"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -97,9 +97,9 @@ __meta__ = {
 
 [node name="Count" type="Label" parent="Control/HBoxContainer/ThrusterPanel/MarginContainer"]
 margin_left = 10.0
-margin_top = 12.0
-margin_right = 210.0
-margin_bottom = 38.0
+margin_top = 5.0
+margin_right = 240.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 2 )
 text = "0"
 align = 2
@@ -109,9 +109,9 @@ __meta__ = {
 }
 
 [node name="TurretPanel" type="Panel" parent="Control/HBoxContainer"]
-margin_left = 780.0
-margin_right = 1000.0
-margin_bottom = 50.0
+margin_left = 775.0
+margin_right = 995.0
+margin_bottom = 35.0
 rect_min_size = Vector2( 220, 0 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/TurretPanel"]
@@ -127,11 +127,11 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Control/HBoxContainer/TurretPanel/MarginContainer"]
 margin_left = 10.0
-margin_top = 12.0
+margin_top = 5.0
 margin_right = 210.0
-margin_bottom = 38.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 2 )
-text = "(3) Turret"
+text = "[3] Turret"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -139,9 +139,9 @@ __meta__ = {
 
 [node name="Count" type="Label" parent="Control/HBoxContainer/TurretPanel/MarginContainer"]
 margin_left = 10.0
-margin_top = 12.0
+margin_top = 5.0
 margin_right = 210.0
-margin_bottom = 38.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 2 )
 text = "0"
 align = 2

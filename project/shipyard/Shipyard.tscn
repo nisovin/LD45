@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://shipyard/Constructor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shipyard/ShipyardGUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://shipyard/Shipyard.gd" type="Script" id=3]
+[ext_resource path="res://shipyard/rails.png" type="Texture" id=4]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 8.89187, 714.194, 0, 0, 0, 0, 1263.41, 711.241, 0, 0, 0, 0, 1263.11, 9.63132, 0, 0, 0, 0, 10, 10 )
+"points": PoolVector2Array( 0, 0, 0, 0, 14.5648, 4.9104, 0, 0, 0, 0, 14.5648, 709.118, 0, 0, 0, 0, 1259.82, 709.118, 0, 0, 0, 0, 1259.82, 4.9104, 0, 0, 0, 0, 14.5648, 4.9104 )
 }
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -20,15 +21,78 @@ script = ExtResource( 3 )
 
 [node name="ShipyardGUI" parent="." instance=ExtResource( 2 )]
 
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Rails" type="Node2D" parent="."]
+
+[node name="Left" type="NinePatchRect" parent="Rails"]
+modulate = Color( 0.521569, 0.521569, 0.521569, 1 )
+margin_left = 6.0
+margin_top = 50.0
+margin_right = 16.0
+margin_bottom = 711.0
+texture = ExtResource( 4 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="NinePatchRect" parent="Rails"]
+modulate = Color( 0.521569, 0.521569, 0.521569, 1 )
+margin_left = 1264.0
+margin_top = 50.0
+margin_right = 1274.0
+margin_bottom = 711.0
+texture = ExtResource( 4 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="NinePatchRect" parent="Rails"]
+modulate = Color( 0.521569, 0.521569, 0.521569, 1 )
+margin_left = 6.0
+margin_top = 702.0
+margin_right = 1274.0
+margin_bottom = 712.0
+texture = ExtResource( 4 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top" type="NinePatchRect" parent="Rails"]
+modulate = Color( 0.521569, 0.521569, 0.521569, 1 )
+margin_left = 6.31842
+margin_top = 49.8403
+margin_right = 1274.32
+margin_bottom = 59.8403
+texture = ExtResource( 4 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2( -4.73724, 45.3979 )
-scale = Vector2( 1.01184, 0.937223 )
-curve = SubResource( 1 )
+position = Vector2( -3.55005, 49.9059 )
+scale = Vector2( 1.01013, 0.926495 )
+curve = SubResource( 4 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 650.493, 712.684 )
-rotation = -0.00234589
-offset = 1342.74
+position = Vector2( 635.365, 709.118 )
+offset = 1326.09
 
 [node name="Constructor" parent="Path2D/PathFollow2D" instance=ExtResource( 1 )]
 rotation = -1.5708
@@ -38,33 +102,41 @@ rotation = -1.5708
 [node name="Cage" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Cage"]
-position = Vector2( -10.5485, 304.149 )
+position = Vector2( 5.9586, 358.398 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/StaticBody2D"]
-position = Vector2( 13.5661, 68.9225 )
 shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Cage"]
-position = Vector2( 1035.51, 307.665 )
+position = Vector2( 1273.93, 374.525 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/StaticBody2D2"]
-position = Vector2( 239.521, 57.7237 )
 shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Cage"]
-position = Vector2( 544.435, 609.188 )
+position = Vector2( 632.468, 711.64 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/StaticBody2D3"]
-position = Vector2( 97.1419, 103.394 )
 shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Cage"]
-position = Vector2( 541.979, -9.59241 )
+position = Vector2( 643.552, 50.144 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/StaticBody2D4"]
-position = Vector2( 102.526, 64.8158 )
 shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}

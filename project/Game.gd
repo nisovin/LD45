@@ -11,8 +11,11 @@ const EnemyBullet = preload("res://universe/EnemyBullet.tscn")
 
 enum { STATE_MENU, STATE_BUILDING, STATE_LAUNCHED, STATE_DEAD }
 
+signal enemy_killed(enemy)
+
 var game_state = STATE_MENU
 var ship = null
+var score = 0
 
 func _ready():
 	randomize()

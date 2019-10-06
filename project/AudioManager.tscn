@@ -1,32 +1,61 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://sounds/thrusters.ogg" type="AudioStream" id=2]
+[ext_resource path="res://sounds/music_fight.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sounds/music_main.ogg" type="AudioStream" id=4]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource( 1 )
 
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MainMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "Music"
+
+[node name="FightMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Music"
+
 [node name="Thrusters" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+bus = "SFX"
 
 [node name="SFX" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer9" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
 
 [node name="AudioStreamPlayer10" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
+
+[node name="AudioStreamPlayer11" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
+
+[node name="AudioStreamPlayer12" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"

@@ -1,13 +1,6 @@
-extends Node2D
+extends "res://parts/PartType.gd"
 
-export var max_hit_points = 10
-onready var hit_points = max_hit_points
+export var hull_max_hit_points = 10
 
-func hit():
-	hit_points -= 1
-	if hit_points == 0:
-		get_parent().queue_free()
-		get_parent().set_meta("freed", true)
-		AudioManager.play_sound("part_dies")
-		Game.ship.ship_controller.calculate_center()
-	return float(hit_points) / float(max_hit_points)
+func _ready():
+	max_hit_points = hull_max_hit_points

@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 const min_color_value = 0.3
-const max_color_value = 0.7
+const max_color_value = 0.9
 
 var dead = false
 var ship_controller = null
@@ -26,8 +26,9 @@ func init(type = null, color = null):
 	else:
 		shape = get_child(0)
 	if color == null:
-		color = Color.white.from_hsv(randf(), 0.9, max_color_value)
+		color = Color.white.from_hsv(randf(), 1.0, max_color_value)
 	current_color = color
+	shape.set_meta("mass", mass)
 	_recurse_color(shape, color)
 	
 func set_color_percent(percent, shape):
@@ -94,6 +95,14 @@ func _on_part_collision(body_id, body, body_shape, local_shape):
 			var part = owner.get_child(0)
 			if part.has_method("hit"):
 				var percent = part.hit()
+				set_color_percent(percent, part)
+				AudioManager.play_sound("hit")
+		elif body.is_in_group("enemies"):
+			var owner_id = shape_find_owner(local_shape)
+			var owner = shape_owner_get_owner(owner_id)
+			var part = owner.get_child(0)
+			if part.has_method("hit"):
+				var percent = part.hit(5)
 				set_color_percent(percent, part)
 				AudioManager.play_sound("hit")
 

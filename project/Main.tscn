@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://font_future_narrow.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://overlay.png" type="Texture" id=2]
 [ext_resource path="res://universe/bkgd_1.png" type="Texture" id=3]
 [ext_resource path="res://universe/bkgd_4.png" type="Texture" id=4]
 [ext_resource path="res://universe/bkgd_3.png" type="Texture" id=5]
 [ext_resource path="res://Main.gd" type="Script" id=6]
 [ext_resource path="res://Camera.gd" type="Script" id=7]
 [ext_resource path="res://EnemyController.gd" type="Script" id=8]
+[ext_resource path="res://font_future_narrow.tres" type="DynamicFont" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -16,27 +18,16 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 80
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 1 )
+
 [node name="Main" type="Node"]
 script = ExtResource( 6 )
-
-[node name="Universe" type="Node2D" parent="."]
-
-[node name="Camera" type="Camera2D" parent="Universe"]
-position = Vector2( 640, 360 )
-current = true
-script = ExtResource( 7 )
-
-[node name="Enemy" type="Node2D" parent="Universe"]
-script = ExtResource( 8 )
-
-[node name="SpawnTimer" type="Timer" parent="Universe/Enemy"]
-
-[node name="DifficultyTimer" type="Timer" parent="Universe/Enemy"]
-wait_time = 15.0
-
-[node name="Turrets" type="Node2D" parent="Universe/Enemy"]
-
-[node name="Tween" type="Tween" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -64,6 +55,25 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 20000, 20000 )
 
+[node name="Universe" type="Node2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="Universe"]
+position = Vector2( 640, 360 )
+current = true
+script = ExtResource( 7 )
+
+[node name="Enemy" type="Node2D" parent="Universe"]
+script = ExtResource( 8 )
+
+[node name="SpawnTimer" type="Timer" parent="Universe/Enemy"]
+
+[node name="DifficultyTimer" type="Timer" parent="Universe/Enemy"]
+wait_time = 15.0
+
+[node name="Turrets" type="Node2D" parent="Universe/Enemy"]
+
+[node name="Tween" type="Tween" parent="."]
+
 [node name="MainGUI" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="MainGUI"]
@@ -73,7 +83,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="MainGUI/Control"]
+[node name="MainMenu" type="Control" parent="MainGUI/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartGameButton" type="Button" parent="MainGUI/Control/MainMenu"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -87,7 +105,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainGUI/Control/Button"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainGUI/Control/MainMenu/StartGameButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 10
@@ -96,7 +114,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MainGUI/Control/Button/VBoxContainer"]
+[node name="Label" type="Label" parent="MainGUI/Control/MainMenu/StartGameButton/VBoxContainer"]
 margin_top = 20.0
 margin_right = 250.0
 margin_bottom = 52.0
@@ -107,7 +125,7 @@ custom_constants/shadow_offset_y = 2
 text = "START GAME"
 align = 1
 
-[node name="Label2" type="Label" parent="MainGUI/Control/Button/VBoxContainer"]
+[node name="Label2" type="Label" parent="MainGUI/Control/MainMenu/StartGameButton/VBoxContainer"]
 margin_top = 62.0
 margin_right = 250.0
 margin_bottom = 80.0
@@ -118,3 +136,237 @@ custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 1
 text = "(with nothing)"
 align = 1
+
+[node name="CreditsButton" type="Button" parent="MainGUI/Control/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -56.0
+margin_top = 129.0
+margin_right = 56.0
+margin_bottom = 161.0
+custom_fonts/font = ExtResource( 9 )
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="MainGUI/Control/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = 188.0
+margin_right = 32.0
+margin_bottom = 220.0
+custom_fonts/font = ExtResource( 9 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FinalScoreLabel" type="Label" parent="MainGUI/Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -550.0
+margin_top = -50.0
+margin_right = 550.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 1100, 100 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0.27451, 0.27451, 0.27451, 1 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 5
+text = "Final Score: 0"
+align = 1
+valign = 1
+
+[node name="CreditsPopup" type="PopupPanel" parent="MainGUI/Control"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -300.0
+margin_right = 500.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 1000, 600 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainGUI/Control/CreditsPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="MainGUI/Control/CreditsPopup/VBoxContainer"]
+margin_right = 1000.0
+margin_bottom = 544.0
+size_flags_vertical = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainGUI/Control/CreditsPopup/VBoxContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 995.0
+margin_bottom = 539.0
+size_flags_vertical = 3
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center]
+
+[color=white][ GAME ][/color]
+[color=#a0a0a0]
+Game created by Nisovin
+[/color]
+
+[color=white][ ART ][/color]
+[color=#a0a0a0]
+Most art created by Nisovin
+
+Parallax Space Scene - By LuminousDragonGames
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://opengameart.org/content/parallax-space-scene-seamlessly-scrolls-too](found on opengameart.org)[/url]
+
+Kenney Future Narrow (font) - By Kenney
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://kenney.nl/assets/kenney-fonts](found on kenney.nl)[/url]
+[/color]
+
+[color=white][ SOUND EFFECTS ][/color]
+[color=#a0a0a0]
+Digital Audio - By Kenney
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://kenney.nl/assets/digital-audio](found on kenney.nl)[/url]
+
+UI Audio - By Kenney
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://kenney.nl/assets/ui-audio](found on kenney.nl)[/url]
+
+50 CC0 retro / synth SFX - By rubberduck
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[url=https://opengameart.org/content/50-cc0-retro-synth-sfx](found on opengameart.org)[/url]
+
+Energy Drain - By qubodup
+License: [url=https://creativecommons.org/licenses/by-sa/3.0/]CC-BY-SA 3.0[/url]
+[url=https://opengameart.org/content/50-cc0-retro-synth-sfx](found on opengameart.org)[/url]
+
+Thrusters Loop - By DJT4NN3R
+License: [url=https://creativecommons.org/licenses/by-sa/3.0/]CC-BY-SA 3.0[/url]
+[url=https://freesound.org/people/DJT4NN3R/sounds/347576/](found on freesound.org)[/url]
+
+4 projectile launches - By Michel Baradari
+License: [url=https://creativecommons.org/licenses/by/3.0/]CC-BY 3.0[/url]
+[url=https://opengameart.org/content/4-projectile-launches](found on opengameart.org)[/url]
+[/color]
+
+[color=white][ MUSIC ][/color]
+[color=#a0a0a0]
+Music from https://filmmusic.io
+\"Inspired\" by Kevin MacLeod (https://incompetech.com)
+\"Werq\" by Kevin MacLeod (https://incompetech.com)
+License: CC BY (http://creativecommons.org/licenses/by/4.0/)
+
+[/color]
+[/center]
+"
+text = "
+
+[ GAME ]
+
+Game created by Nisovin
+
+
+[ ART ]
+
+Most art created by Nisovin
+
+Parallax Space Scene - By LuminousDragonGames
+License: CC0
+(found on opengameart.org)
+
+Kenney Future Narrow (font) - By Kenney
+License: CC0
+(found on kenney.nl)
+
+
+[ SOUND EFFECTS ]
+
+Digital Audio - By Kenney
+License: CC0
+(found on kenney.nl)
+
+UI Audio - By Kenney
+License: CC0
+(found on kenney.nl)
+
+50 CC0 retro / synth SFX - By rubberduck
+License: CC0
+(found on opengameart.org)
+
+Energy Drain - By qubodup
+License: CC-BY-SA 3.0
+(found on opengameart.org)
+
+Thrusters Loop - By DJT4NN3R
+License: CC-BY-SA 3.0
+(found on freesound.org)
+
+4 projectile launches - By Michel Baradari
+License: CC-BY 3.0
+(found on opengameart.org)
+
+
+[ MUSIC ]
+
+Music from https://filmmusic.io
+\"Inspired\" by Kevin MacLeod (https://incompetech.com)
+\"Werq\" by Kevin MacLeod (https://incompetech.com)
+License: CC BY (http://creativecommons.org/licenses/by/4.0/)
+
+
+
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainGUI/Control/CreditsPopup/VBoxContainer"]
+margin_top = 548.0
+margin_right = 1000.0
+margin_bottom = 600.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MainGUI/Control/CreditsPopup/VBoxContainer/HBoxContainer"]
+margin_left = 449.0
+margin_right = 551.0
+margin_bottom = 52.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 10
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 10
+
+[node name="CloseButton" type="Button" parent="MainGUI/Control/CreditsPopup/VBoxContainer/HBoxContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 97.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 9 )
+text = "Close"
+
+[node name="Overlay" type="TextureRect" parent="MainGUI"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

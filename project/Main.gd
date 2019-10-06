@@ -4,18 +4,31 @@ onready var universe = $Universe
 onready var camera = $Universe/Camera
 onready var enemy_controller = $Universe/Enemy
 onready var tween = $Tween
+onready var overlay = $MainGUI/Overlay
+onready var main_menu = $MainGUI/Control/MainMenu
+onready var start_button = $MainGUI/Control/MainMenu/StartGameButton
+onready var final_score = $MainGUI/Control/FinalScoreLabel
 var shipyard = null
 
 func _ready():
-	$MainGUI/Control/Button.connect("pressed", self, "start_game")
+	start_button.connect("pressed", self, "start_game")
+	$MainGUI/Control/MainMenu/CreditsButton.connect("pressed", self, "show_credits")
+	$MainGUI/Control/CreditsPopup/VBoxContainer/HBoxContainer/MarginContainer/CloseButton.connect("pressed", self, "hide_credits")
+	$MainGUI/Control/MainMenu/QuitButton.connect("pressed", self, "quit_game")
+	AudioManager.fade_music("main", "in")
 	
 func start_game():
-	$MainGUI/Control.visible = false
+	main_menu.visible = false
+	tween.interpolate_property(overlay, "modulate:a", 0, 1, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
+	yield(get_tree().create_timer(1.1), "timeout")
 	camera.reset()
 	shipyard = Game.Shipyard.instance()
 	shipyard.connect("ship_ready", self, "launch_ship")
 	universe.add_child(shipyard)
 	Game.game_state = Game.STATE_BUILDING
+	tween.interpolate_property(overlay, "modulate:a", 1, 0, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
 	
 func launch_ship(ship):
 	# move ship
@@ -38,21 +51,31 @@ func launch_ship(ship):
 	ship.linear_damp = -1
 	ship.update()
 	
-	# final settings
+	# music and sound
+	AudioManager.fade_music("main", "out")
+	AudioManager.fade_music("fight", "in")
 	AudioManager.play_sound("ship_done")
+	
+	# final settings
 	Game.ship = ship
 	Game.game_state = Game.STATE_LAUNCHED
 	shipyard.destroy()
+	shipyard = null
+	enemy_controller.start()
 
 func end_game():
-	print("end game")
 	if Game.game_state == Game.STATE_DEAD:
-		print("already ended")
 		return
 	Game.game_state = Game.STATE_DEAD
-	tween.interpolate_property(universe, "modulate:a", 1.0, 0.0, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	final_score.text = "Final Score: " + str(Game.ship.ship_controller.score)
+	tween.interpolate_property(final_score, "modulate:a", 0, 1, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
+	yield(get_tree().create_timer(3), "timeout")
+	AudioManager.fade_music("fight", "out")
+	tween.interpolate_property(overlay, "modulate:a", 0, 1, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 	yield(get_tree().create_timer(3.5), "timeout")
+	final_score.modulate.a = 0
 	camera.reset()
 	enemy_controller.reset()
 	if shipyard != null:
@@ -65,5 +88,18 @@ func end_game():
 		bullet.queue_free()
 	for bullet in get_tree().get_nodes_in_group("enemy_bullets"):
 		bullet.queue_free()
-	universe.modulate.a = 1.0
 	Game.game_state = Game.STATE_MENU
+	tween.interpolate_property(overlay, "modulate:a", 1, 0, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
+	AudioManager.fade_music("main", "in")
+	yield(get_tree().create_timer(3.5), "timeout")
+	main_menu.visible = true
+
+func show_credits():
+	$MainGUI/Control/CreditsPopup.popup_centered()
+	
+func hide_credits():
+	$MainGUI/Control/CreditsPopup.hide()
+
+func quit_game():
+	get_tree().quit()
