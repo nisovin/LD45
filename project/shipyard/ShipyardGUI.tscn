@@ -4,6 +4,7 @@
 [ext_resource path="res://font_future_narrow.tres" type="DynamicFont" id=2]
 
 [node name="ShipyardGUI" type="CanvasLayer"]
+layer = 2
 script = ExtResource( 1 )
 
 [node name="Control" type="Control" parent="."]
@@ -18,6 +19,7 @@ __meta__ = {
 anchor_right = 1.0
 margin_top = 5.0
 margin_bottom = 40.0
+mouse_filter = 2
 custom_constants/separation = 30
 alignment = 1
 __meta__ = {
@@ -29,10 +31,12 @@ margin_left = 285.0
 margin_right = 465.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 180, 0 )
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/HullPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 5
 custom_constants/margin_left = 10
@@ -71,10 +75,12 @@ margin_left = 495.0
 margin_right = 745.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 250, 0 )
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/ThrusterPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 5
 custom_constants/margin_left = 10
@@ -113,10 +119,12 @@ margin_left = 775.0
 margin_right = 995.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 220, 0 )
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/TurretPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 5
 custom_constants/margin_left = 10
@@ -150,33 +158,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HintPanel" type="Panel" parent="Control"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -75.0
-margin_top = -150.0
-margin_right = 75.0
-margin_bottom = -100.0
-grow_horizontal = 2
-rect_min_size = Vector2( 350, 0 )
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/HintPanel"]
+[node name="LaunchButton" type="Button" parent="Control"]
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = -140.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 2
-text = "Click To Release Part"
-align = 1
-valign = 1
+text = "[L]aunch"
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -48,6 +48,7 @@ func start_hint_timers():
 	yield(get_tree().create_timer(20), "timeout")
 	if !launched and Game.game_state == Game.STATE_BUILDING:
 		GlobalGUI.show_hint("Press L to launch")
+	gui.show_launch_button()
 	
 
 func prepare_next_part():
@@ -79,20 +80,22 @@ func launch_part(obj):
 	prepare_next_part()
 	
 func launch_ship():
-	var mass = 0
-	var most_massive = null
-	for child in $BuildArea.get_children():
-		if child.mass > mass:
-			mass = child.mass
-			most_massive = child
-	for child in $BuildArea.get_children():
-		if child != most_massive:
-			child.queue_free()
-	if most_massive != null:
-		emit_signal("ship_ready", most_massive)
+	if Game.game_state == Game.STATE_BUILDING:
+		var mass = 0
+		var most_massive = null
+		for child in $BuildArea.get_children():
+			if child.mass > mass:
+				mass = child.mass
+				most_massive = child
+		for child in $BuildArea.get_children():
+			if child != most_massive:
+				child.queue_free()
+		if most_massive != null:
+			emit_signal("ship_ready", most_massive)
 	
 func destroy():
 	set_process(false)
+	gui.fade_out()
 	# remove cage
 	$Cage.queue_free()
 	# animate rails
@@ -115,37 +118,36 @@ func destroy():
 	# remove
 	yield(get_tree().create_timer(3.2), "timeout")
 	queue_free()
-
-func _process(delta):
-	_process_actions(delta)
-	_process_movement(delta)
 	
-func _process_actions(delta):
-	if Input.is_action_just_pressed("fire") or Input.is_action_just_pressed("thrust"):
+func _unhandled_input(event):
+	_process_input_actions(event)
+	_process_input_movement(event)
+	
+func _process_input_actions(event):
+	if event.is_action_pressed("fire") or event.is_action_pressed("thrust"):
 		released = true
 		var obj = constructor.get_spawn_object()
 		if obj != null:
 			launch_part(obj)
 		
-	if Input.is_action_just_pressed("launch_ship"):
+	elif event.is_action_pressed("launch_ship"):
 		launched = true
 		call_deferred("launch_ship")
 		
-	if Input.is_action_just_pressed("part_hull"):
+	elif event.is_action_pressed("part_hull"):
 		switched = true
 		current_part = 0
 		prepare_next_part()
-	if Input.is_action_just_pressed("part_thruster"):
+	elif event.is_action_pressed("part_thruster"):
 		switched = true
 		current_part = 1
 		prepare_next_part()
-	if Input.is_action_just_pressed("part_turret"):
+	elif event.is_action_pressed("part_turret"):
 		switched = true
 		current_part = 2
 		prepare_next_part()
-	
-	
-func _process_movement(delta):
+		
+func _process_input_movement(event):
 	var facing = constructor.global_transform.x
 	var side = "?"
 	if facing.x > 0.9:
@@ -157,7 +159,7 @@ func _process_movement(delta):
 	elif facing.y < -0.9:
 		side = "bottom"
 		
-	if Input.is_action_just_pressed("move_right"):
+	if event.is_action_pressed("move_right"):
 		moved = true
 		last_pressed = "right"
 		if side == "top":
@@ -168,7 +170,7 @@ func _process_movement(delta):
 			movement_dir = last_dir
 		else:
 			movement_dir = -last_dir
-	if Input.is_action_just_pressed("move_left"):
+	elif event.is_action_pressed("move_left"):
 		moved = true
 		last_pressed = "left"
 		if side == "top":
@@ -179,7 +181,7 @@ func _process_movement(delta):
 			movement_dir = last_dir
 		else:
 			movement_dir = -last_dir
-	if Input.is_action_just_pressed("move_up"):
+	elif event.is_action_pressed("move_up"):
 		moved = true
 		last_pressed = "up"
 		if side == "left":
@@ -190,7 +192,7 @@ func _process_movement(delta):
 			movement_dir = last_dir
 		else:
 			movement_dir = -last_dir
-	if Input.is_action_just_pressed("move_down"):
+	elif event.is_action_pressed("move_down"):
 		moved = true
 		last_pressed = "down"
 		if side == "left":
@@ -202,19 +204,22 @@ func _process_movement(delta):
 		else:
 			movement_dir = -last_dir
 			
-	if Input.is_action_just_released("move_right"):
+	elif event.is_action_released("move_right"):
 		if !Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_down") and !Input.is_action_pressed("move_up"):
 			movement_dir = 0
-	if Input.is_action_just_released("move_left"):
+	elif event.is_action_released("move_left"):
 		if !Input.is_action_pressed("move_right") and !Input.is_action_pressed("move_down") and !Input.is_action_pressed("move_up"):
 			movement_dir = 0
-	if Input.is_action_just_released("move_up"):
+	elif event.is_action_released("move_up"):
 		if !Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_down") and !Input.is_action_pressed("move_right"):
 			movement_dir = 0
-	if Input.is_action_just_released("move_down"):
+	elif event.is_action_released("move_down"):
 		if !Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_right") and !Input.is_action_pressed("move_up"):
 			movement_dir = 0
-
+			
 	if movement_dir != 0:
 		last_dir = movement_dir
+
+func _process(delta):
+	if movement_dir != 0:
 		constructor_pather.offset += movement_dir * constructor_speed * delta
