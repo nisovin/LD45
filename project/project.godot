@@ -18,6 +18,8 @@ _global_script_class_icons={
 config/name="Scrap Spaceship"
 config/description="Build a spaceship from scrap parts and venture into the enemy-filled darkness of space."
 run/main_scene="res://Main.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="ScrapSpaceship"
 config/icon="res://gameicon.png"
 
 [autoload]

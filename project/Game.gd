@@ -16,12 +16,29 @@ signal enemy_killed(enemy)
 var game_state = STATE_MENU
 var ship = null
 var score = 0
+var high_score = 0
 
 func _ready():
 	randomize()
 	randomize()
+	load_high_score()
 
 func _input(event):
 	if event.is_action_pressed("fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 		
+func load_high_score():
+	var file := File.new()
+	if file.file_exists("user://highscore.dat"):
+		var err = file.open("user://highscore.dat", File.READ)
+		if err == OK:
+			high_score = file.get_32()
+			file.close()
+
+func save_high_score():
+	var file = File.new()
+	var err = file.open("user://highscore.dat", File.WRITE)
+	if err == OK:
+		file.store_32(high_score)
+		file.close()
+	

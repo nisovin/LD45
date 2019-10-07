@@ -28,6 +28,11 @@ func _ready():
 		$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseQuit.disabled = true
 		$MainGUI/Control/MainMenu/QuitButton.disabled = true
 		
+	if Game.high_score > 0:
+		$MainGUI/Control/MainMenu/HighScoreLabel.text = "High Score: " + str(Game.high_score)
+	else:
+		$MainGUI/Control/MainMenu/HighScoreLabel.text = ""
+		
 func _process(delta):
 	title_font.outline_color.h += 0.03 * delta
 	if title_font.outline_color.h > 1:
@@ -97,9 +102,13 @@ func launch_ship(ship):
 	shipyard = null
 	enemy_controller.start()
 
-func end_game():
+func end_game(score = 0):
 	if Game.game_state == Game.STATE_DEAD:
 		return
+	if score > Game.high_score:
+		Game.high_score = score
+		Game.save_high_score()
+	$MainGUI/Control/MainMenu/HighScoreLabel.text = "High Score: " + str(Game.high_score)
 	var prev_state = Game.game_state
 	Game.game_state = Game.STATE_DEAD
 	if prev_state == Game.STATE_LAUNCHED:
@@ -125,12 +134,11 @@ func end_game():
 	for bullet in get_tree().get_nodes_in_group("enemy_bullets"):
 		bullet.queue_free()
 	Game.game_state = Game.STATE_MENU
+	main_menu.visible = true
 	tween.interpolate_property(overlay, "modulate:a", 1, 0, 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 	if prev_state == Game.STATE_LAUNCHED:
 		AudioManager.fade_music("main", "in")
-	yield(get_tree().create_timer(3.5), "timeout")
-	main_menu.visible = true
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen

@@ -52,7 +52,7 @@ func calculate_center():
 		position = center
 		ship.mass = mass
 	else:
-		emit_signal("ship_dead")
+		emit_signal("ship_dead", score)
 	
 func enemy_killed(enemy):
 	score += enemy.max_health
@@ -81,7 +81,7 @@ func _process(delta):
 					break
 					
 	if last_action < OS.get_ticks_msec() - 60000:
-		emit_signal("ship_dead")
+		emit_signal("ship_dead", score)
 	
 func _physics_process(delta):
 	if Input.is_action_pressed("thrust"):
