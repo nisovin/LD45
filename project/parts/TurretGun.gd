@@ -7,4 +7,5 @@ func _process(delta):
 func shoot_bullet(bullet):
 	bullet.modulate = modulate
 	bullet.global_position = $Barrel/Position2D.global_position
+	bullet.global_rotation = $Barrel.global_rotation
 	bullet.apply_central_impulse($Barrel.global_transform.x * 500)

@@ -61,3 +61,12 @@ bus = "SFX"
 
 [node name="AudioStreamPlayer12" type="AudioStreamPlayer" parent="SFX"]
 bus = "SFX"
+
+[node name="AudioStreamPlayer13" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
+
+[node name="AudioStreamPlayer14" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"
+
+[node name="AudioStreamPlayer15" type="AudioStreamPlayer" parent="SFX"]
+bus = "SFX"

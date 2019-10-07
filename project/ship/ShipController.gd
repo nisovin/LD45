@@ -9,6 +9,7 @@ var ship : RigidBody2D
 var thrust_per_thruster = 2500
 
 var last_fired = 0
+var last_hit = 0
 var center := Vector2.ZERO
 
 var thrusted = false
@@ -36,6 +37,7 @@ func start_hint_timers():
 		GlobalGUI.show_hint("Click to fire weapons")
 	
 func calculate_center():
+	last_hit = OS.get_ticks_msec()
 	var total = Vector2.ZERO
 	var mass = 0
 	var c = 0
@@ -76,6 +78,9 @@ func _process(delta):
 					turret.shoot_bullet(bullet)
 					AudioManager.play_sound("shoot")
 					break
+					
+	if last_hit < OS.get_ticks_msec() - 30000:
+		emit_signal("ship_dead")
 	
 func _physics_process(delta):
 	if Input.is_action_pressed("thrust"):

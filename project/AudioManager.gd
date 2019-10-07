@@ -7,7 +7,9 @@ const Sounds = {
 	"part_dies": preload("res://sounds/part_dies.ogg"),
 	"ship_done": preload("res://sounds/ship_done.ogg"),
 	"shoot": preload("res://sounds/shoot.ogg"),
-	"hit": preload("res://sounds/hit.ogg")
+	"hit": preload("res://sounds/hit.ogg"),
+	"enemy_shoot": preload("res://sounds/enemy_shoot.ogg"),
+	"enemy_die": preload("res://sounds/enemy_die.ogg")
 }
 
 onready var tween = $Tween
@@ -40,7 +42,6 @@ func play_sound(sound):
 			player.stream = Sounds[sound]
 			player.play()
 			return
-	print("no player available")
 
 func play_thrusters(on):
 	if on:

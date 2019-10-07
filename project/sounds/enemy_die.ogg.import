@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/enemy_die.ogg-8901b03e272c495904d402acf5400078.oggstr"
+
+[deps]
+
+source_file="res://sounds/enemy_die.ogg"
+dest_files=[ "res://.import/enemy_die.ogg-8901b03e272c495904d402acf5400078.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

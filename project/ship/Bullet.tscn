@@ -4,19 +4,21 @@
 [ext_resource path="res://ship/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 4.42833
+radius = 5.30516
 
 [node name="Bullet" type="RigidBody2D" groups=[
 "player_bullets",
 ]]
 collision_layer = 4
 collision_mask = 0
+mass = 0.1
 linear_damp = 0.0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 6, 0 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.5, 0.1 )
 texture = ExtResource( 1 )
