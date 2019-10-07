@@ -67,7 +67,7 @@ func resume_game():
 func end_from_menu():
 	get_tree().paused = false
 	pause_menu.visible = false
-	end_game()	
+	end_game()
 	
 func launch_ship(ship):
 	# move ship

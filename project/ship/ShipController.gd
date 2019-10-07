@@ -67,7 +67,7 @@ func _process(delta):
 	
 	if Input.is_action_pressed("fire"):
 		shot = true
-		if last_fired < OS.get_ticks_msec() - 75:
+		if last_fired < OS.get_ticks_msec() - 50:
 			last_fired = OS.get_ticks_msec()
 			for turret in get_tree().get_nodes_in_group("turrets"):
 				var cd_until = turret.get_meta("cd_until") if turret.has_meta("cd_until") else 0
