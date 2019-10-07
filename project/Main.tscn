@@ -298,6 +298,9 @@ custom_constants/shadow_offset_y = 5
 text = "Final Score: 0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CreditsPopup" type="PopupPanel" parent="MainGUI/Control"]
 anchor_left = 0.5

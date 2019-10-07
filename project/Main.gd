@@ -23,7 +23,6 @@ func _ready():
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseResume.connect("pressed", self, "resume_game")
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseMainMenu.connect("pressed", self, "end_from_menu")
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseQuit.connect("pressed", self, "quit_game")
-	AudioManager.fade_music("main", "in")
 		
 func _process(delta):
 	title_font.outline_color.h += 0.03 * delta

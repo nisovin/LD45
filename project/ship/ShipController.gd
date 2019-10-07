@@ -6,7 +6,7 @@ onready var score_label = $CanvasLayer/Control/PanelScore/Score
 
 var ship : RigidBody2D
 
-var thrust_per_thruster = 2000
+var thrust_per_thruster = 2500
 
 var last_fired = 0
 var center := Vector2.ZERO

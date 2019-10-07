@@ -94,9 +94,8 @@ func launch_ship():
 			emit_signal("ship_ready", most_massive)
 	
 func destroy():
-	set_process(false)
+	# remove stuff
 	gui.fade_out()
-	# remove cage
 	$Cage.queue_free()
 	# animate rails
 	var tween = $Tween
@@ -120,8 +119,9 @@ func destroy():
 	queue_free()
 	
 func _unhandled_input(event):
-	_process_input_actions(event)
-	_process_input_movement(event)
+	if Game.game_state == Game.STATE_BUILDING:
+		_process_input_actions(event)
+		_process_input_movement(event)
 	
 func _process_input_actions(event):
 	if event.is_action_pressed("fire") or event.is_action_pressed("thrust"):
