@@ -9,7 +9,7 @@ var ship : RigidBody2D
 var thrust_per_thruster = 2500
 
 var last_fired = 0
-var last_hit = 0
+var last_action = 0
 var center := Vector2.ZERO
 
 var thrusted = false
@@ -29,15 +29,15 @@ func start_hint_timers():
 	yield(get_tree().create_timer(3), "timeout")
 	if !thrusted:
 		GlobalGUI.show_hint("Press Space Bar to fire thrusters")
-	yield(get_tree().create_timer(5), "timeout")
+	yield(get_tree().create_timer(6), "timeout")
 	if !braked:
 		GlobalGUI.show_hint("Press Shift to use inertial brakes")
-	yield(get_tree().create_timer(5), "timeout")
+	yield(get_tree().create_timer(6), "timeout")
 	if !shot:
 		GlobalGUI.show_hint("Click to fire weapons")
 	
 func calculate_center():
-	last_hit = OS.get_ticks_msec()
+	last_action = OS.get_ticks_msec()
 	var total = Vector2.ZERO
 	var mass = 0
 	var c = 0
@@ -57,6 +57,7 @@ func calculate_center():
 func enemy_killed(enemy):
 	score += enemy.max_health
 	score_label.text = str(score)
+	last_action = OS.get_ticks_msec()
 	
 func _process(delta):
 	if Input.is_action_just_released("thrust"):
@@ -79,7 +80,7 @@ func _process(delta):
 					AudioManager.play_sound("shoot")
 					break
 					
-	if last_hit < OS.get_ticks_msec() - 30000:
+	if last_action < OS.get_ticks_msec() - 60000:
 		emit_signal("ship_dead")
 	
 func _physics_process(delta):
@@ -88,6 +89,8 @@ func _physics_process(delta):
 		var thrust = Vector2.ZERO
 		for thruster in get_tree().get_nodes_in_group("thrusters"):
 			thrust += thruster.fire()
+		if thrust != Vector2.ZERO:
+			last_action = OS.get_ticks_msec()
 		ship.applied_force = thrust * thrust_per_thruster
 		AudioManager.play_thrusters(thrust != Vector2.ZERO)
 	

@@ -82,7 +82,9 @@ func add_part(part, pos, rot):
 
 func _on_part_collision(body_id, body, body_shape, local_shape):
 	if Game.game_state == Game.STATE_BUILDING:
-		if body.is_in_group("parts") and !dead and !body.dead:
+		if body.is_in_group("cage"):
+			AudioManager.play_sound("bump")
+		elif body.is_in_group("parts") and !dead and !body.dead:
 			if body.mass > mass:
 				body.glob_onto(self)
 			else:

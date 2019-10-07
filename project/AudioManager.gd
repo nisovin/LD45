@@ -1,6 +1,7 @@
 extends Node
 
 const Sounds = {
+	"bump": preload("res://sounds/bump.ogg"),
 	"part_appear": preload("res://sounds/part_appear.ogg"),
 	"part_release": preload("res://sounds/part_release.ogg"),
 	"part_attach": preload("res://sounds/part_attach.ogg"),

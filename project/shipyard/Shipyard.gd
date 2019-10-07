@@ -103,7 +103,6 @@ func destroy():
 	var bottom = $Rails/Bottom
 	var left = $Rails/Left
 	var right = $Rails/Right
-	var constructor = $Path2D/PathFollow2D/Constructor
 	tween.interpolate_property(top, "rect_position:y", top.rect_position.y, top.rect_position.y - 200, 10, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.interpolate_property(bottom, "rect_position:y", bottom.rect_position.y, bottom.rect_position.y + 200, 10, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.interpolate_property(left, "rect_position:x", left.rect_position.x, left.rect_position.x - 200, 10, Tween.TRANS_LINEAR, Tween.EASE_IN)

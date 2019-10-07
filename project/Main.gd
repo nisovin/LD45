@@ -24,6 +24,10 @@ func _ready():
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseMainMenu.connect("pressed", self, "end_from_menu")
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseQuit.connect("pressed", self, "quit_game")
 		
+	if OS.get_name() == "HTML5":
+		$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseQuit.disabled = true
+		$MainGUI/Control/MainMenu/QuitButton.disabled = true
+		
 func _process(delta):
 	title_font.outline_color.h += 0.03 * delta
 	if title_font.outline_color.h > 1:
@@ -142,4 +146,5 @@ func hide_credits():
 	$MainGUI/Control/CreditsPopup.hide()
 
 func quit_game():
-	get_tree().quit()
+	if OS.get_name() != "HTML5":
+		get_tree().quit()
