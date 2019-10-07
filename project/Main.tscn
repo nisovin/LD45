@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://font_future_narrow.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://overlay.png" type="Texture" id=2]
@@ -9,6 +9,14 @@
 [ext_resource path="res://Camera.gd" type="Script" id=7]
 [ext_resource path="res://EnemyController.gd" type="Script" id=8]
 [ext_resource path="res://font_future_narrow.tres" type="DynamicFont" id=9]
+
+[sub_resource type="DynamicFont" id=5]
+size = 100
+outline_size = 5
+outline_color = Color( 0, 0.745098, 0.8, 1 )
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -88,6 +96,22 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="MainGUI/Control/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -490.5
+margin_top = -256.5
+margin_right = 490.5
+margin_bottom = -143.5
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Scrap Spaceship"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -371,11 +395,10 @@ License: [url=https://creativecommons.org/licenses/by/3.0/]CC-BY 3.0[/url]
 
 [color=white][ MUSIC ][/color]
 [color=#a0a0a0]
-\"Inspired\" by Kevin MacLeod
-\"Werq\" by Kevin MacLeod
+\"Inspired\" by Kevin MacLeod ([url=https://incompetech.com]incompetech.com[/url])
+\"Werq\" by Kevin MacLeod ([url=https://incompetech.com]incompetech.com[/url])
 Music from [url=https://filmmusic.io]https://filmmusic.io[/url]
 License: [url=http://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]
-[url=https://incompetech.com](found at incompetech.com)[/url]
 [/color]
 
 [color=white][ ENGINE ][/color]
@@ -441,11 +464,10 @@ License: CC-BY 3.0
 
 [ MUSIC ]
 
-\"Inspired\" by Kevin MacLeod
-\"Werq\" by Kevin MacLeod
+\"Inspired\" by Kevin MacLeod (incompetech.com)
+\"Werq\" by Kevin MacLeod (incompetech.com)
 Music from https://filmmusic.io
 License: CC BY 4.0
-(found at incompetech.com)
 
 
 [ ENGINE ]

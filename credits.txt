@@ -52,11 +52,10 @@ License: [url=https://creativecommons.org/licenses/by/3.0/]CC-BY 3.0[/url]
 
 [color=white][ MUSIC ][/color]
 [color=#a0a0a0]
-"Inspired" by Kevin MacLeod
-"Werq" by Kevin MacLeod
+"Inspired" by Kevin MacLeod ([url=https://incompetech.com]incompetech.com[/url])
+"Werq" by Kevin MacLeod ([url=https://incompetech.com]incompetech.com[/url])
 Music from [url=https://filmmusic.io]https://filmmusic.io[/url]
 License: [url=http://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]
-[url=https://incompetech.com](found at incompetech.com)[/url]
 [/color]
 
 [color=white][ ENGINE ][/color]

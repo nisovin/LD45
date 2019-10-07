@@ -5,6 +5,8 @@ onready var camera = $Universe/Camera
 onready var enemy_controller = $Universe/Enemy
 onready var tween = $Tween
 onready var overlay = $MainGUI/Overlay
+onready var title = $MainGUI/Control/MainMenu/TitleLabel
+onready var title_font = title.get("custom_fonts/font")
 onready var main_menu = $MainGUI/Control/MainMenu
 onready var pause_menu = $MainGUI/Control/InGameMenu
 onready var start_button = $MainGUI/Control/MainMenu/StartGameButton
@@ -22,6 +24,11 @@ func _ready():
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseMainMenu.connect("pressed", self, "end_from_menu")
 	$MainGUI/Control/InGameMenu/Panel/MarginContainer/VBoxContainer/PauseQuit.connect("pressed", self, "quit_game")
 	AudioManager.fade_music("main", "in")
+		
+func _process(delta):
+	title_font.outline_color.h += 0.03 * delta
+	if title_font.outline_color.h > 1:
+		title_font.outline_color.h -= 1
 	
 func _input(event):
 	if event.is_action_pressed("pause"):
