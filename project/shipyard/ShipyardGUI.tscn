@@ -26,14 +26,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HullPanel" type="Panel" parent="Control/HBoxContainer"]
+[node name="HullButton" type="Button" parent="Control/HBoxContainer"]
 margin_left = 285.0
 margin_right = 465.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 180, 0 )
-mouse_filter = 2
+hint_tooltip = "Hull parts provide protection from enemy fire"
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/HullPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/HullButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -45,7 +45,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/HBoxContainer/HullPanel/MarginContainer"]
+[node name="Label" type="Label" parent="Control/HBoxContainer/HullButton/MarginContainer"]
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 170.0
@@ -57,7 +57,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Count" type="Label" parent="Control/HBoxContainer/HullPanel/MarginContainer"]
+[node name="Count" type="Label" parent="Control/HBoxContainer/HullButton/MarginContainer"]
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 170.0
@@ -70,14 +70,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ThrusterPanel" type="Panel" parent="Control/HBoxContainer"]
+[node name="ThrusterButton" type="Button" parent="Control/HBoxContainer"]
 margin_left = 495.0
 margin_right = 745.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 250, 0 )
-mouse_filter = 2
+hint_tooltip = "Thrusters allow you to move. They have a 120-degree arc.
+You can only move in directions that your thrusters allow."
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/ThrusterPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/ThrusterButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -89,7 +90,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/HBoxContainer/ThrusterPanel/MarginContainer"]
+[node name="Label" type="Label" parent="Control/HBoxContainer/ThrusterButton/MarginContainer"]
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 240.0
@@ -101,7 +102,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Count" type="Label" parent="Control/HBoxContainer/ThrusterPanel/MarginContainer"]
+[node name="Count" type="Label" parent="Control/HBoxContainer/ThrusterButton/MarginContainer"]
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 240.0
@@ -114,14 +115,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TurretPanel" type="Panel" parent="Control/HBoxContainer"]
+[node name="TurretButton" type="Button" parent="Control/HBoxContainer"]
 margin_left = 775.0
 margin_right = 995.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 220, 0 )
-mouse_filter = 2
+hint_tooltip = "Turrets allow you to fire at enemies."
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/TurretPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/TurretButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -133,7 +134,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/HBoxContainer/TurretPanel/MarginContainer"]
+[node name="Label" type="Label" parent="Control/HBoxContainer/TurretButton/MarginContainer"]
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 210.0
@@ -145,7 +146,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Count" type="Label" parent="Control/HBoxContainer/TurretPanel/MarginContainer"]
+[node name="Count" type="Label" parent="Control/HBoxContainer/TurretButton/MarginContainer"]
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 210.0
@@ -165,6 +166,7 @@ margin_left = -140.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = 40.0
+hint_tooltip = "Leave the shipyard to test your ship against automated turrets."
 custom_fonts/font = ExtResource( 2 )
 text = "[L]aunch"
 __meta__ = {

@@ -29,12 +29,12 @@ func start_hint_timers():
 	yield(get_tree().create_timer(3), "timeout")
 	if !thrusted:
 		GlobalGUI.show_hint("Press Space Bar to fire thrusters")
-	yield(get_tree().create_timer(6), "timeout")
+	yield(get_tree().create_timer(8), "timeout")
 	if !braked:
 		GlobalGUI.show_hint("Press Shift to use inertial brakes")
-	yield(get_tree().create_timer(6), "timeout")
+	yield(get_tree().create_timer(8), "timeout")
 	if !shot:
-		GlobalGUI.show_hint("Click to fire weapons")
+		GlobalGUI.show_hint("Hold mouse button to fire weapons")
 	
 func calculate_center():
 	last_action = OS.get_ticks_msec()

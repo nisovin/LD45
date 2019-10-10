@@ -1,5 +1,9 @@
 extends Camera2D
 
+func _ready():
+	$Area2D.connect("body_entered", self, "entered_range")
+	$Area2D.connect("body_exited", self, "exited_range")
+
 func reset():
 	position = Vector2(640, 360)
 	zoom = Vector2(1, 1)
@@ -17,3 +21,9 @@ func _process(delta):
 		var len_sq = dir.length_squared()
 		if len_sq > 25 * 25:
 			position += dir * delta
+
+func entered_range(body):
+	body.in_range = true
+	
+func exited_range(body):
+	body.in_range = false

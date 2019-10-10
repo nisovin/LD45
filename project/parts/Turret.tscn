@@ -23,6 +23,7 @@ contact_monitor = true
 linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 3 )
+first_type = "turret"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 10, 0 )

@@ -3,6 +3,9 @@ extends RigidBody2D
 const min_color_value = 0.3
 const max_color_value = 0.9
 
+export var first_type = "none"
+var types = {"hull": 0, "thruster": 0, "turret": 0}
+
 var dead = false
 var ship_controller = null
 var layer = 0
@@ -11,6 +14,7 @@ var current_color
 
 func _ready():
 	connect("body_shape_entered", self, "_on_part_collision")
+	types[first_type] = 1
 
 func init(type = null, color = null):
 	var shape
@@ -65,6 +69,8 @@ func glob_onto(part):
 	mass += part.mass
 	var dir = part.linear_velocity.normalized() * 5
 	dir += linear_velocity.normalized() * -2
+	for t in part.types:
+		types[t] += part.types[t]
 	for child in part.get_children():
 		var pos = child.global_position
 		var rot = child.global_rotation

@@ -24,6 +24,7 @@ contact_monitor = true
 linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 1 )
+first_type = "hull"
 
 [node name="Square" type="CollisionShape2D" parent="."]
 position = Vector2( 35, 0 )

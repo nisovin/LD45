@@ -9,13 +9,13 @@
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 spread = 2.0
 gravity = Vector3( 0, 0, 0 )
@@ -26,7 +26,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 90.0
 angle_random = 1.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 3 )
 
 [node name="Thruster" type="RigidBody2D" groups=[
 "parts",
@@ -40,6 +40,7 @@ contact_monitor = true
 linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 4 )
+first_type = "thruster"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( 35, 0 )
@@ -72,5 +73,5 @@ amount = 25
 lifetime = 1.5
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 2 )
+process_material = SubResource( 4 )
 texture = ExtResource( 5 )

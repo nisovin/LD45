@@ -1,13 +1,16 @@
 extends CanvasLayer
 
 onready var tween = $Tween
-onready var hull_count = $Control/HBoxContainer/HullPanel/MarginContainer/Count
-onready var thruster_count = $Control/HBoxContainer/ThrusterPanel/MarginContainer/Count
-onready var turret_count = $Control/HBoxContainer/TurretPanel/MarginContainer/Count
+onready var hull_count = $Control/HBoxContainer/HullButton/MarginContainer/Count
+onready var thruster_count = $Control/HBoxContainer/ThrusterButton/MarginContainer/Count
+onready var turret_count = $Control/HBoxContainer/TurretButton/MarginContainer/Count
 
 func _ready():
 	$Control/LaunchButton.visible = false
-	$Control/LaunchButton.connect("pressed", self, "launch_button_pressed")
+	$Control/HBoxContainer/HullButton.connect("pressed", self, "button_pressed", ["part_hull"])
+	$Control/HBoxContainer/ThrusterButton.connect("pressed", self, "button_pressed", ["part_thruster"])
+	$Control/HBoxContainer/TurretButton.connect("pressed", self, "button_pressed", ["part_turret"])
+	$Control/LaunchButton.connect("pressed", self, "button_pressed", ["launch_ship"])
 
 func set_hull_count(count):
 	hull_count.text = str(count)
@@ -21,9 +24,9 @@ func set_turret_count(count):
 func show_launch_button():
 	$Control/LaunchButton.visible = true
 
-func launch_button_pressed():
+func button_pressed(action):
 	var key = InputEventAction.new()
-	key.action = "launch_ship"
+	key.action = action
 	key.pressed = true
 	Input.parse_input_event(key)
 

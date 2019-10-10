@@ -39,13 +39,13 @@ func start_hint_timers():
 	yield(get_tree().create_timer(3), "timeout")
 	if !released and Game.game_state == Game.STATE_BUILDING:
 		GlobalGUI.show_hint("Click to release part")
-	yield(get_tree().create_timer(6), "timeout")
+	yield(get_tree().create_timer(8), "timeout")
 	if !moved and Game.game_state == Game.STATE_BUILDING:
-		GlobalGUI.show_hint("Use WASD to move")
-	yield(get_tree().create_timer(6), "timeout")
+		GlobalGUI.show_hint("Use WASD to move around the shipyard")
+	yield(get_tree().create_timer(8), "timeout")
 	if !switched and Game.game_state == Game.STATE_BUILDING:
-		GlobalGUI.show_hint("Press 1, 2, 3 to switch parts")
-	yield(get_tree().create_timer(20), "timeout")
+		GlobalGUI.show_hint("Press 1, 2, 3 to switch parts\n(or use buttons above)")
+	yield(get_tree().create_timer(15), "timeout")
 	if !launched and Game.game_state == Game.STATE_BUILDING:
 		GlobalGUI.show_hint("Press L to launch")
 	gui.show_launch_button()
@@ -87,11 +87,16 @@ func launch_ship():
 			if child.mass > mass:
 				mass = child.mass
 				most_massive = child
-		for child in $BuildArea.get_children():
-			if child != most_massive:
-				child.queue_free()
 		if most_massive != null:
-			emit_signal("ship_ready", most_massive)
+			if most_massive.types["thruster"] == 0:
+				GlobalGUI.show_error("Your ship needs at least one thruster")
+			elif most_massive.types["turret"] == 0:
+				GlobalGUI.show_error("Your ship needs at least one turret")
+			else:
+				for child in $BuildArea.get_children():
+					if child != most_massive:
+						child.queue_free()
+				emit_signal("ship_ready", most_massive)
 	
 func destroy():
 	# remove stuff
@@ -160,48 +165,48 @@ func _process_input_movement(event):
 		
 	if event.is_action_pressed("move_right"):
 		moved = true
-		last_pressed = "right"
 		if side == "top":
 			movement_dir = -1
 		elif side == "bottom":
 			movement_dir = 1
-		elif side == last_pressed:
+		elif last_pressed == "right":
 			movement_dir = last_dir
 		else:
 			movement_dir = -last_dir
+		last_pressed = "right"
 	elif event.is_action_pressed("move_left"):
 		moved = true
-		last_pressed = "left"
 		if side == "top":
 			movement_dir = 1
 		elif side == "bottom":
 			movement_dir = -1
-		elif side == last_pressed:
+		elif last_pressed == "left":
 			movement_dir = last_dir
 		else:
 			movement_dir = -last_dir
+		last_pressed = "left"
 	elif event.is_action_pressed("move_up"):
 		moved = true
-		last_pressed = "up"
 		if side == "left":
 			movement_dir = -1
 		elif side == "right":
 			movement_dir = 1
-		elif side == last_pressed:
+		elif last_pressed == "up":
 			movement_dir = last_dir
 		else:
 			movement_dir = -last_dir
+		last_pressed = "up"
 	elif event.is_action_pressed("move_down"):
 		moved = true
-		last_pressed = "down"
 		if side == "left":
 			movement_dir = 1
 		elif side == "right":
 			movement_dir = -1
-		elif side == last_pressed:
+		elif last_pressed == "down":
 			movement_dir = last_dir
 		else:
 			movement_dir = -last_dir
+		last_pressed = "down"
 			
 	elif event.is_action_released("move_right"):
 		if !Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_down") and !Input.is_action_pressed("move_up"):

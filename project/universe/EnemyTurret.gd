@@ -9,13 +9,14 @@ var cooldown = 1000
 var max_health = 5
 var health = 5
 var last_attack = 0
+var in_range = false
 var dead = false
 
 func _ready():
 	connect("body_shape_entered", self, "_on_collision")
 
 func _process(delta):
-	if Game.game_state == Game.STATE_LAUNCHED and !dead:
+	if Game.game_state == Game.STATE_LAUNCHED and in_range and !dead:
 		var ship_pos = Game.ship.ship_controller.global_position
 		$Barrel.look_at(ship_pos)
 		if last_attack < OS.get_ticks_msec() - cooldown:
