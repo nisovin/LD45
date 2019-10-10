@@ -150,6 +150,14 @@ func _process_input_actions(event):
 		switched = true
 		current_part = 2
 		prepare_next_part()
+	elif event.is_action_pressed("color_plus"):
+		var o = constructor.get_spawn_object()
+		if o:
+			o.cycle_color(1)
+	elif event.is_action_pressed("color_minus"):
+		var o = constructor.get_spawn_object()
+		if o:
+			o.cycle_color(-1)
 		
 func _process_input_movement(event):
 	var facing = constructor.global_transform.x

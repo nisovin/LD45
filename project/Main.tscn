@@ -11,7 +11,7 @@
 [ext_resource path="res://font_future_narrow.tres" type="DynamicFont" id=9]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 1005.44, 593.074 )
+extents = Vector2( 972.634, 554.114 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 100

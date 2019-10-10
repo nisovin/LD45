@@ -2,7 +2,6 @@ extends RigidBody2D
 
 onready var bullet_spawn = $Barrel/Position2D
 
-var attack_range = 1000
 var bullet_speed = 1000
 var cooldown = 1000
 
@@ -20,10 +19,8 @@ func _process(delta):
 		var ship_pos = Game.ship.ship_controller.global_position
 		$Barrel.look_at(ship_pos)
 		if last_attack < OS.get_ticks_msec() - cooldown:
-			var v = ship_pos - global_position
-			if v.length_squared() < attack_range * attack_range:
-				shoot(v)
-				last_attack = OS.get_ticks_msec()
+			shoot(ship_pos - global_position)
+			last_attack = OS.get_ticks_msec()
 
 func shoot(dir: Vector2):
 	var bullet = Game.EnemyBullet.instance()

@@ -32,12 +32,19 @@ func init(type = null, color = null):
 	if color == null:
 		color = Color.white.from_hsv(randf(), 1.0, max_color_value)
 	current_color = color
+	if first_type == "hull":
+		mass = shape.get_child(0).hull_max_hit_points + 5
 	shape.set_meta("mass", mass)
 	_recurse_color(shape, color)
 	
 func set_color_percent(percent, shape):
 	var v = (percent * (max_color_value - min_color_value)) + min_color_value
 	_recurse_color_v(shape, v)
+	
+func cycle_color(dir):
+	var node = get_child(0).get_child(0)
+	if node is Sprite:
+		node.modulate.h += 0.02 * dir
 	
 func _recurse_color(node, color):
 	if node is Sprite:
